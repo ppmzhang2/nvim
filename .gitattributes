@@ -1,0 +1,4 @@
+* text=auto
+*.vim eol=lf
+*.md eol=lf
+*.sh eol=lf
