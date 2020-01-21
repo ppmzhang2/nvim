@@ -1,11 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Important:
-"       This requries that you install https://github.com/amix/vimrc !
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => GUI related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set font according to system
@@ -38,17 +31,6 @@ let g:molokai_original = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map <leader>e :e! ~/.vim/vimrcs/*.vim<cr>
 " autocmd! bufwritepost ~/.vim/vimrcs/*.vim source ~/.vim/vimrcs/*.vim
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Turn persistent undo on
-"    means that you can undo even when you close a buffer/VIM
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" try
-"     set undodir=~/.vim_runtime/temp_dirs/undodir
-"     set undofile
-" catch
-" endtry
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
