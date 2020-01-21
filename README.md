@@ -4,19 +4,21 @@ This is a unified Vim configuration for all my devices, inspired by [the ultimat
 
 ## Install
 
-Clone the configuration files to folder `.vim`:
+1. Set up Vundle:
 
-```sh
-git clone https://github.com/ppmzhang2/vimrc.git ~/.vim
-```
+   `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 
-Edit `~/.vimrc` to include them:
+2. Clone the configuration files to folder `~/.vim`:
 
-```vim
-source ~/.vim/vimrcs/vundle.vim
-source ~/.vim/vimrcs/basic.vim
-source ~/.vim/vimrcs/filetypes.vim
-source ~/.vim/vimrcs/extended.vim
-```
+   `git clone https://github.com/ppmzhang2/vimrc.git ~/.vim/vimrcs`
 
-Finally update plugins.
+3. Edit `~/.vimrc` to include them:
+
+    ```vim
+    source ~/.vim/vimrcs/vundle.vim
+    source ~/.vim/vimrcs/basic.vim
+    source ~/.vim/vimrcs/filetypes.vim
+    source ~/.vim/vimrcs/extended.vim
+    ```
+
+4. Update plugins.
