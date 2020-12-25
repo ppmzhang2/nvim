@@ -21,6 +21,7 @@ Plugin 'preservim/nerdtree'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ervandew/supertab'
+Plugin 'APZelos/blamer.nvim'
 " Plugin 'altercation/vim-colors-solarized'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -49,3 +50,9 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+"
+" blamer.nvim
+" 1. enable
+let g:blamer_enabled = 1
+" 2. hide in insert modes
+let g:blamer_show_in_insert_modes = 0
