@@ -10,7 +10,7 @@ This is a unified Vim configuration for all my devices, inspired by [the ultimat
 
 2. Clone the configuration files to folder `~/.vim`:
 
-   `git clone https://github.com/ppmzhang2/vimrc.git ~/.vim/vimrcs`
+   `rm -rf ~/.vim/vimrcs && git clone https://github.com/ppmzhang2/vimrc.git ~/.vim/vimrcs`
 
 3. Edit `~/.vimrc` to include them:
 
