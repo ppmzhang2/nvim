@@ -22,6 +22,8 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'vim-airline/vim-airline'
 Plugin 'ervandew/supertab'
 Plugin 'APZelos/blamer.nvim'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'tpope/vim-dispatch'
 " Plugin 'altercation/vim-colors-solarized'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
