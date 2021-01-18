@@ -58,3 +58,13 @@ filetype plugin indent on    " required
 let g:blamer_enabled = 1
 " 2. hide in insert modes
 let g:blamer_show_in_insert_modes = 0
+" syntastic
+" 1. python checkers
+let g:syntastic_python_checkers = ['pylint']
+" 2. passive mod
+let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": [] }
+" 3. manual check shortcut
+nnoremap <C-w>e :SyntasticCheck<cr>
