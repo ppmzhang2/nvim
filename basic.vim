@@ -55,6 +55,10 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 " To avoid the extra 'shift' keypress when typing the colon
 :nmap ; :
 
+" cursor always in the center
+nmap j jzz
+nmap k kzz
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
