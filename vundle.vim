@@ -68,3 +68,14 @@ let g:syntastic_mode_map = {
     \ "passive_filetypes": [] }
 " 3. manual check shortcut
 nnoremap <C-w>e :SyntasticCheck<cr>
+" ycm
+" 1. enable on listed file types
+let g:ycm_filetype_whitelist = {
+    \ "c":1,
+    \ "cpp":1,
+    \ "objc":1,
+    \ "sh":1,
+    \ "zsh":1,
+    \ "zimbu":1,
+    \ "python":1,
+    \ }
