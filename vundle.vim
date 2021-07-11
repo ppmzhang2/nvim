@@ -79,3 +79,6 @@ let g:ycm_filetype_whitelist = {
     \ "zimbu":1,
     \ "python":1,
     \ }
+" 2. clang support: use installed clang and give fully control code completion
+let g:ycm_clangd_uses_ycmd_caching = 0
+let g:ycm_clangd_binary_path = "/opt/homebrew/opt/llvm/bin/clangd"

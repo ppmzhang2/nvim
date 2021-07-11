@@ -22,4 +22,6 @@ This is a unified Vim configuration for all my devices, inspired by [the ultimat
     ```
 
 4. Update plugins.
-5. Install **YouCompleteMe** with the [instruction](https://github.com/ycm-core/YouCompleteMe#installation).
+5. Install **YouCompleteMe**
+   - [instruction](https://github.com/ycm-core/YouCompleteMe#installation)
+   - install `llvm` for `clang` support
