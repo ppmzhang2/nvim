@@ -299,8 +299,9 @@ fun! CleanExtraSpaces()
     call setreg('/', old_query)
 endfun
 
+" auto clean only when leaving Vim, otherwise may compromise searching
 if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.sh,*.scala :call CleanExtraSpaces()
+    autocmd VimLeavePre *.txt,*.js,*.py,*.sh,*.scala :call CleanExtraSpaces()
 endif
 
 
