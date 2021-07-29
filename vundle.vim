@@ -24,6 +24,8 @@ Plugin 'ervandew/supertab'
 Plugin 'APZelos/blamer.nvim'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-dispatch'
+Plugin 'cespare/vim-toml'
+Plugin 'vim-scripts/LargeFile'
 " Plugin 'altercation/vim-colors-solarized'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
