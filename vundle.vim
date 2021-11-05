@@ -55,6 +55,11 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "
+" NERDTree
+" 1. toggle to current path
+nnoremap <C-w>t :NERDTreeToggle %<CR>
+" 2. a narrow sidebar
+let g:NERDTreeWinSize=20
 " blamer.nvim
 " 1. enable
 let g:blamer_enabled = 1
