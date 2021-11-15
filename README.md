@@ -25,3 +25,4 @@ This is a unified Vim configuration for all my devices, inspired by [the ultimat
 5. Install **YouCompleteMe**
    - [instruction](https://github.com/ycm-core/YouCompleteMe#installation)
    - install `llvm` for `clang` support
+   - install `clang-format` for c / cpp formatting

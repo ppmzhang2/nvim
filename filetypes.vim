@@ -22,6 +22,11 @@ au FileType python noremap <buffer> <leader>r :Dispatch python %<cr>
 au FileType python noremap <buffer> <leader>f :Dispatch yapf -i %<cr>
 au FileType python noremap <buffer> <leader>s :Dispatch isort %<cr>
 
+""""""""""""""""""""""""""""""
+" => C section
+""""""""""""""""""""""""""""""
+au FileType c noremap <buffer> <leader>f :Dispatch clang-format -i %<cr>
+au FileType c noremap <buffer> <leader>c :Dispatch clang % -o %.out<cr>
 
 """"""""""""""""""""""""""""""
 " => JavaScript section
