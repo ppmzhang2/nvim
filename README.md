@@ -4,6 +4,14 @@ This is a unified Vim configuration for all my devices, inspired by [the ultimat
 
 ## Install
 
+Prerequisites:
+
+- `vim-devicons`
+  - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts#font-installation) to avoid break
+- `YouCompleteMe`
+  - `llvm` for `clang` support
+  - `clang-format` for c / cpp formatting
+
 1. Set up Vundle:
 
    `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
@@ -24,5 +32,3 @@ This is a unified Vim configuration for all my devices, inspired by [the ultimat
 4. Update plugins.
 5. Install **YouCompleteMe**
    - [instruction](https://github.com/ycm-core/YouCompleteMe#installation)
-   - install `llvm` for `clang` support
-   - install `clang-format` for c / cpp formatting

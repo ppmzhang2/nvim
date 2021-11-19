@@ -26,6 +26,9 @@ Plugin 'ycm-core/YouCompleteMe'
 Plugin 'tpope/vim-dispatch'
 Plugin 'cespare/vim-toml'
 Plugin 'vim-scripts/LargeFile'
+Plugin 'preservim/tagbar'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 " Plugin 'altercation/vim-colors-solarized'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
@@ -54,17 +57,51 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-"
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" plugin configure
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:NERDTreeGitStatusIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+" tagbar
+" 1. width
+let g:tagbar_width = 30
+let g:tagbar_left = 1
+let g:tagbar_vertical = 0
+
 " NERDTree
-" 1. toggle to current path
-nnoremap <C-w>t :NERDTreeToggle %<CR>
-" 2. a narrow sidebar
+" 1. ignore machine codes
+let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+" 2. toggle sidebar and terminal
+nnoremap <C-S>1 :CloseSideBars<CR> :NERDTreeFind<CR> :wincmd l<CR>
+nnoremap <C-S>2 :CloseSideBars<CR> :Tagbar<CR>
+nnoremap <C-S>c :CloseSideBars<CR>
+nnoremap <C-W>t :below terminal<CR>
+" 3. a narrow sidebar
 let g:NERDTreeWinSize=20
+" 4. minimal UI
+let NERDTreeMinimalUI = 1
+" 5. remove dir arrow to save space
+let NERDTreeDirArrowExpandable=""
+let NERDTreeDirArrowCollapsible=""
+
 " blamer.nvim
 " 1. enable
 let g:blamer_enabled = 1
 " 2. hide in insert modes
 let g:blamer_show_in_insert_modes = 0
+
 " syntastic
 " 1. python checkers
 let g:syntastic_python_checkers = ['pylint']
@@ -75,6 +112,7 @@ let g:syntastic_mode_map = {
     \ "passive_filetypes": [] }
 " 3. manual check shortcut
 nnoremap <C-w>e :SyntasticCheck<cr>
+
 " ycm
 " 1. enable on listed file types
 let g:ycm_filetype_whitelist = {
@@ -89,3 +127,17 @@ let g:ycm_filetype_whitelist = {
 " 2. clang support: use installed clang and give fully control code completion
 let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = "/opt/homebrew/opt/llvm/bin/clangd"
+
+" vim-devicons
+let g:webdevicons_enable_nerdtree = 1
+let g:airline_powerline_fonts = 1
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" helper functions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:CloseSideBars()
+    TagbarClose
+    NERDTreeClose
+endfunction
+command! -nargs=0 CloseSideBars :call s:CloseSideBars()
