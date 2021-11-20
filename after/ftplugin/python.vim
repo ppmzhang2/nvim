@@ -15,4 +15,5 @@ inoremap <buffer> $f # --- <esc>a
 noremap <buffer> <leader>r :Dispatch python %<cr>
 noremap <buffer> <leader>f :Dispatch yapf -i %<cr>
 noremap <buffer> <leader>s :Dispatch isort %<cr>
-noremap <buffer> K :Dispatch python -m pydoc <cword><cr>
+" use the YCM GetDoc command
+map <buffer> K <plug>(YCMHover)

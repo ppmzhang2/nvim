@@ -89,6 +89,14 @@ let NERDTreeDirArrowCollapsible = ""
 let g:blamer_enabled = 1
 " 2. hide in insert modes
 let g:blamer_show_in_insert_modes = 0
+" 3. 1s is too much
+let g:blamer_delay = 500
+" 4. prefix
+let g:blamer_prefix = ' '
+" 5. template
+let g:blamer_template = '[<committer>] <committer-time>: <summary>'
+" 6. use relative time
+let g:blamer_relative_time = 1
 
 " syntastic
 " 1. python checkers
@@ -115,6 +123,15 @@ let g:ycm_filetype_whitelist = {
 " 2. clang support: use installed clang and give fully control code completion
 let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = "/opt/homebrew/opt/llvm/bin/clangd"
+" 3. no auto GetDoc
+let g:ycm_auto_hover = ''
+augroup YcmCustomHover
+  autocmd!
+  autocmd FileType c,cpp let b:ycm_hover = {
+    \ 'command': 'GetDoc',
+    \ 'syntax': &filetype
+    \ }
+augroup END
 
 " vim-devicons
 let g:webdevicons_enable_nerdtree = 1

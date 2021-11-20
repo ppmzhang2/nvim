@@ -33,7 +33,7 @@ Prerequisites:
     ```vim
     source ~/.vim/vimrcs/plug.vim
     source ~/.vim/vimrcs/basic.vim
-    source ~/.vim/vimrcs/filetypes.vim
+    source ~/.vim/vimrcs/langs.vim
     source ~/.vim/vimrcs/extended.vim
     ```
 
