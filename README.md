@@ -16,16 +16,17 @@ Prerequisites:
   - `ripgrep` for `:Rg`
   - `the_silver_searcher` for `:Ag`
 
-1. Set up `vim-plug`:
+1. Clone the configuration files to folder `~/.vim`:
+
+   `rm -rf ~/.vim && git clone https://github.com/ppmzhang2/vimrc.git ~/.vim`
+
+
+2. Set up `vim-plug`:
 
    ```sh
    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
    ```
-
-2. Clone the configuration files to folder `~/.vim`:
-
-   `rm -rf ~/.vim/vimrcs && git clone https://github.com/ppmzhang2/vimrc.git ~/.vim/vimrcs`
 
 3. Edit `~/.vimrc` to include them:
 
