@@ -22,6 +22,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-gitgutter'
 " colorscheme
 Plug 'tomasr/molokai'
 Plug 'AlessandroYorba/Sierra'
@@ -70,7 +71,7 @@ let g:tagbar_vertical = 0
 " 1. ignore machine codes
 let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 " 2. toggle sidebar and terminal
-nnoremap <C-S>q :CloseSideBars<CR> :NERDTreeFind<CR> :wincmd l<CR> :NERDTreeRefreshRoot<CR>
+nnoremap <C-S>q :CloseSideBars<CR> :NERDTreeFind<CR> :wincmd l<CR>
 nnoremap <C-S>w :CloseSideBars<CR> :Tagbar<CR>
 nnoremap <C-S>c :CloseSideBars<CR>
 nnoremap <C-S>t :belowright terminal<CR>
