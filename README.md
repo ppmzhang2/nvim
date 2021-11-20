@@ -1,6 +1,6 @@
 # The Vim Configuration
 
-This is a unified Vim configuration for all my devices, inspired by [the ultimate vimrc](https://github.com/amix/vimrc) and [Vundle](https://github.com/VundleVim/Vundle.vim).
+This is a unified Vim configuration for all my devices, inspired by [the ultimate vimrc](https://github.com/amix/vimrc).
 
 ## Install
 
@@ -12,9 +12,12 @@ Prerequisites:
   - `llvm` for `clang` support
   - `clang-format` for c / cpp formatting
 
-1. Set up Vundle:
+1. Set up `vim-plug`:
 
-   `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+   ```sh
+   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+   ```
 
 2. Clone the configuration files to folder `~/.vim`:
 
@@ -23,12 +26,23 @@ Prerequisites:
 3. Edit `~/.vimrc` to include them:
 
     ```vim
-    source ~/.vim/vimrcs/vundle.vim
+    source ~/.vim/vimrcs/plug.vim
     source ~/.vim/vimrcs/basic.vim
     source ~/.vim/vimrcs/filetypes.vim
     source ~/.vim/vimrcs/extended.vim
     ```
 
 4. Update plugins.
-5. Install **YouCompleteMe**
-   - [instruction](https://github.com/ycm-core/YouCompleteMe#installation)
+5. Install **YouCompleteMe** compilers from [instruction](https://github.com/ycm-core/YouCompleteMe#installation):
+   - install dependency:
+
+    ```sh
+    brew install llvm cmake go python macvim
+    ```
+
+   - install compilers:
+
+    ```sh
+    cd ~/.vim/plugged/YouCompleteMe
+    ./install.py --cs-completer --go-completer --rust-completer --clangd-completerp
+    ```
