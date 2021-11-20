@@ -31,6 +31,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 
+" 4s delay is too much
+set updatetime=100
+
 " Sets how many lines of history VIM has to remember
 set history=500
 
