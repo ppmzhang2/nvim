@@ -49,5 +49,5 @@ Prerequisites:
 
     ```sh
     cd ~/.vim/plugged/YouCompleteMe
-    ./install.py --cs-completer --go-completer --rust-completer --clangd-completerp
+    ./install.py --cs-completer --go-completer --rust-completer --clangd-completer
     ```
