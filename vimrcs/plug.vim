@@ -6,7 +6,6 @@
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
-Plug 'tomasr/molokai'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdtree'
@@ -23,12 +22,32 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ycm-core/YouCompleteMe'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" colorscheme
+Plug 'tomasr/molokai'
+Plug 'AlessandroYorba/Sierra'
+Plug 'morhetz/gruvbox'  " very popular
 call plug#end()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => plugin configure
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme
+" background
+set background=dark
+" " - molokai
+" let g:molokai_original = 1  " original
+" let g:rehash256 = 1  " 256 color version
+" colorscheme molokai
+" " - sierra
+" let g:sierra_Sunset = 1  " dark grey
+" let g:sierra_Twilight = 1  " even darker grey
+" let g:sierra_Midnight = 1  " almost black
+" colorscheme sierra
+" " - gruvbox
+colorscheme gruvbox
+
+" nerdtree-git-plugin
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -54,7 +73,8 @@ let NERDTreeIgnore = ['\.pyc$', '__pycache__']
 nnoremap <C-S>q :CloseSideBars<CR> :NERDTreeFind<CR> :wincmd l<CR> :NERDTreeRefreshRoot<CR>
 nnoremap <C-S>w :CloseSideBars<CR> :Tagbar<CR>
 nnoremap <C-S>c :CloseSideBars<CR>
-nnoremap <C-W>t :below terminal<CR>
+nnoremap <C-S>t :belowright terminal<CR>
+nnoremap <C-S>g :belowright Git<CR>
 " 3. a narrow sidebar
 let g:NERDTreeWinSize = 25
 " 4. minimal UI
