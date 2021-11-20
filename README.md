@@ -11,6 +11,10 @@ Prerequisites:
 - `YouCompleteMe`
   - `llvm` for `clang` support
   - `clang-format` for c / cpp formatting
+- `fzf`
+  - `fzf` for `:FZF`
+  - `ripgrep` for `:Rg`
+  - `the_silver_searcher` for `:Ag`
 
 1. Set up `vim-plug`:
 
