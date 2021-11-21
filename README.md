@@ -31,8 +31,8 @@ Prerequisites:
 3. Edit `~/.vimrc` to include them:
 
     ```vim
-    source ~/.vim/vimrcs/plug.vim
     source ~/.vim/vimrcs/basic.vim
+    source ~/.vim/vimrcs/plug.vim
     source ~/.vim/vimrcs/langs.vim
     source ~/.vim/vimrcs/extended.vim
     ```
