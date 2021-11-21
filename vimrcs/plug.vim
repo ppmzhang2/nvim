@@ -5,28 +5,32 @@
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-fugitive'
-Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
 Plug 'preservim/nerdtree'
-Plug 'vim-syntastic/syntastic'
-Plug 'vim-airline/vim-airline'
+Plug 'godlygeek/tabular'
 Plug 'ervandew/supertab'
-Plug 'APZelos/blamer.nvim'
 Plug 'tpope/vim-dispatch'
-Plug 'cespare/vim-toml'
-Plug 'vim-scripts/LargeFile'
 Plug 'preservim/tagbar'
-Plug 'ryanoasis/vim-devicons'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+" syntax
 Plug 'ycm-core/YouCompleteMe'
+Plug 'dense-analysis/ale'
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'APZelos/blamer.nvim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+" fuzzy finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
-" colorscheme
+" file spec
+Plug 'vim-scripts/LargeFile'
+Plug 'cespare/vim-toml'
+Plug 'plasticboy/vim-markdown'
+" UI
+Plug 'vim-airline/vim-airline'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tomasr/molokai'
 Plug 'AlessandroYorba/Sierra'
-Plug 'morhetz/gruvbox'  " very popular
+Plug 'morhetz/gruvbox'  " STAR
 call plug#end()
 
 
@@ -75,7 +79,7 @@ nnoremap <C-S>q :CloseSideBars<CR> :NERDTreeFind<CR> :wincmd l<CR>
 nnoremap <C-S>w :CloseSideBars<CR> :Tagbar<CR>
 nnoremap <C-S>c :CloseSideBars<CR>
 nnoremap <C-S>t :belowright terminal<CR>
-nnoremap <C-S>g :belowright Git<CR>
+nnoremap <C-S>g :belowright Git<CR><C-W>5-
 " 3. a narrow sidebar
 let g:NERDTreeWinSize = 25
 " 4. minimal UI
@@ -98,16 +102,22 @@ let g:blamer_template = '[<committer>] <committer-time>: <summary>'
 " 6. use relative time
 let g:blamer_relative_time = 1
 
-" syntastic
-" 1. python checkers
-let g:syntastic_python_checkers = ['pylint']
-" 2. passive mod
-let g:syntastic_mode_map = {
-    \ "mode": "passive",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": [] }
-" 3. manual check shortcut
-nnoremap <C-w>e :SyntasticCheck<cr>
+" ale
+" ale for linting and fixing only
+let g:ale_completion_enabled = 0
+" ale warning list window setting
+let g:ale_open_list = 1
+let g:ale_list_window_size = 5
+" manually but instantly
+let g:ale_lint_delay = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
+nnoremap <C-W>e :ALELint<CR>
+nnoremap <C-W>f :ALEFix<CR>
+nnoremap <leader>f :ALEFix<CR>
 
 " ycm
 " 1. enable on listed file types
@@ -123,7 +133,7 @@ let g:ycm_filetype_whitelist = {
 " 2. clang support: use installed clang and give fully control code completion
 let g:ycm_clangd_uses_ycmd_caching = 0
 let g:ycm_clangd_binary_path = "/opt/homebrew/opt/llvm/bin/clangd"
-" 3. no auto GetDoc
+" 3. GetDoc manually
 let g:ycm_auto_hover = ''
 augroup YcmCustomHover
   autocmd!
@@ -132,10 +142,16 @@ augroup YcmCustomHover
     \ 'syntax': &filetype
     \ }
 augroup END
+nmap K <plug>(YCMHover)
 
 " vim-devicons
 let g:webdevicons_enable_nerdtree = 1
 let g:airline_powerline_fonts = 1
+
+" vim-gitgutter
+" manual toggle instead of auto display as the sign column may
+" be occupied by ale / syntastic
+let g:gitgutter_enabled = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -13,7 +13,9 @@ inoremap <buffer> $f # --- <esc>a
 
 " cmd
 noremap <buffer> <leader>r :Dispatch python %<cr>
-noremap <buffer> <leader>f :Dispatch yapf -i %<cr>
-noremap <buffer> <leader>s :Dispatch isort %<cr>
-" use the YCM GetDoc command
-map <buffer> K <plug>(YCMHover)
+
+" ale
+" Check Python files with flake8 and pylint.
+let b:ale_linters = ['flake8', 'pylint']
+" Fix Python files with autopep8 and yapf.
+let b:ale_fixers = ['yapf', 'black', 'isort']

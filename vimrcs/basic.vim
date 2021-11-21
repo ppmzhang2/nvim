@@ -32,6 +32,7 @@
 set nocompatible
 
 " 4s delay is too much
+" used by YCM hover, nerdtree-git-plugin, etc.
 set updatetime=100
 
 " Sets how many lines of history VIM has to remember
@@ -74,6 +75,11 @@ nmap k kzz
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " show line number
 set number
+
+" force the signcolumn to appear
+" otherwise the main editor window may not be stable when
+" syntastic / gitgutter is toggled
+set scl=yes
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
