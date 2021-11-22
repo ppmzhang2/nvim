@@ -18,4 +18,4 @@ noremap <buffer> <leader>r :Dispatch python %<cr>
 " Check Python files with flake8 and pylint.
 let b:ale_linters = ['flake8', 'pylint']
 " Fix Python files with autopep8 and yapf.
-let b:ale_fixers = ['yapf', 'black', 'isort']
+let b:ale_fixers = ['yapf', 'isort']

@@ -1,6 +1,6 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => GUI related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " Set font according to system
 if has("mac") || has("macunix")
     set gfn=IBM\ Plex\ Mono:h14,Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
@@ -21,16 +21,16 @@ set guioptions-=l
 set guioptions-=L
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => TBD Fast editing and reloading of vimrc configs
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " map <leader>e :e! ~/.vim/vimrcs/*.vim<cr>
 " autocmd! bufwritepost ~/.vim/vimrcs/*.vim source ~/.vim/vimrcs/*.vim
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => Command mode related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " Smart mappings on the command line
 cno $h e ~/
 cno $d e ~/Desktop/
@@ -42,9 +42,9 @@ cno $c e <C-\>eCurrentFileDir("e")<cr>
 cno $q <C-\>eDeleteTillSlash()<cr>
 
 " Bash like keys for the command line
-cnoremap <C-A>		<Home>
-cnoremap <C-E>		<End>
-cnoremap <C-K>		<C-U>
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
 
 cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
@@ -55,9 +55,9 @@ cmap ½ $
 imap ½ $
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => Parenthesis/bracket
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " vnoremap $1 <esc>`>a)<esc>`<i(<esc>
 " vnoremap $2 <esc>`>a]<esc>`<i[<esc>
 " vnoremap $3 <esc>`>a}<esc>`<i{<esc>
@@ -74,59 +74,21 @@ imap ½ $
 " inoremap $e ""<esc>i
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => General abbreviations
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => Omni complete functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ack searching and cope displaying
-"    requires ack.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use the the_silver_searcher if possible (much faster than Ack)
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
-endif
-
-" When you press gv you Ack after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" Open Ack and put the cursor in the right position
-map <leader>g :Ack
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with Ack, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
-
-" Make sure that enter is never overriden in the quickfix window
-autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 " => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" =============================================================================
 func! DeleteTillSlash()
     let g:cmd = getcmdline()
 
