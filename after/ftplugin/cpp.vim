@@ -1,5 +1,5 @@
 " cmd
-noremap <buffer> <leader>c :Dispatch clang % -o %.out<CR>
+noremap <buffer> <leader>c :Dispatch clang++ -std=c++17 -o %.out %<CR>
 noremap <buffer> <leader>r :Dispatch %.out<CR>
 
 " ale

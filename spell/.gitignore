@@ -1,0 +1,4 @@
+# ignore .spl, .sug and .add file
+*.spl
+*.sug
+*.add
