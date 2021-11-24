@@ -20,7 +20,6 @@ Prerequisites:
 
    `rm -rf ~/.vim && git clone https://github.com/ppmzhang2/vimrc.git ~/.vim`
 
-
 2. Set up `vim-plug`:
 
    ```sh
