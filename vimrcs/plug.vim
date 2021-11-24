@@ -67,6 +67,8 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 
 " tagbar
+" - keep tags' order they have in the source file
+let g:tagbar_sort = 0
 " - width
 let g:tagbar_width = 25
 " - top-left
@@ -105,6 +107,9 @@ let g:blamer_prefix = ' '
 let g:blamer_template = '[<committer>] <committer-time>: <summary>'
 " - use relative time
 let g:blamer_relative_time = 1
+
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
 
 " ale
 " - for linting and fixing only
