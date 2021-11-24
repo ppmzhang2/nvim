@@ -3,22 +3,17 @@
 " =============================================================================
 " Set font according to system
 if has("mac") || has("macunix")
-    set gfn=IBM\ Plex\ Mono:h14,Hack:h14,Source\ Code\ Pro:h15,Menlo:h15
+    set gfn=Hack_Nerd_Font_Mono:h20,Menlo:h20
 elseif has("win16") || has("win32")
-    set gfn=IBM\ Plex\ Mono:h14,Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
-elseif has("gui_gtk2")
-    set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+    set gfn=Bitstream_Vera_Sans_Mono:h20,IBM_Plex_Mono:h20
+    set gfw=Microsoft_Yahei_20,WenQuanYi_Zen_Hei_20
+elseif has("gui_gtk2") || has("gui_gtk3")
+    set gfn=Bitstream_Vera_Sans_Mono_20,Fixed_20
 elseif has("linux")
-    set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+    set gfn=Bitstream_Vera_Sans_Mono_20
 elseif has("unix")
-    set gfn=Monospace\ 11
+    set gfn=Monospace_20
 endif
-
-" Disable scrollbars (real hackers don't use scrollbars for navigation!)
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
 
 
 " =============================================================================

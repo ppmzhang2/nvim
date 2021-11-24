@@ -119,6 +119,8 @@ let g:ale_lint_on_save = 0
 let g:ale_lint_on_filetype_changed = 0
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 0
+" show warning in airline status bar
+let g:airline#extensions#ale#enabled = 1
 " - shortcuts
 nnoremap <C-W>e :ALELint<CR>
 nnoremap <leader>f :ALEFix<CR>

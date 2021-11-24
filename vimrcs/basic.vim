@@ -11,6 +11,8 @@
 "    -> editing_mapping
 "    -> spell_checking
 "    -> misc
+"    -> popup_menu
+"    -> completion_options
 "    -> helper_functions
 "
 " =============================================================================
@@ -158,6 +160,12 @@ endif
 if has("gui_running")
     set guioptions-=T
     set guioptions-=e
+    " disable scrollbars
+    " real hackers don't use scrollbars for navigation!
+    set guioptions-=r
+    set guioptions-=R
+    set guioptions-=l
+    set guioptions-=L
     set guifont=*
     set t_Co=256
     set guitablabel=%M\ %t
@@ -335,6 +343,28 @@ map <leader>pp :setlocal paste!<cr>
 
 
 " -----------------------------------------------------------------------------
+" -> popup_menu
+" -----------------------------------------------------------------------------
+" popup menu minimum width
+set pumwidth=2
+" popup menu maximum height
+set pumheight=10
+
+
+" -----------------------------------------------------------------------------
+" -> completion_options
+" -----------------------------------------------------------------------------
+" popup completion mode
+set completeopt=popup,popuphidden,menuone
+" completion popup
+set completepopup=border:off,align:menu,highlight:hl-PmenuSel
+" scroll popup window
+inoremap <expr> <C-e> ScrollPopup(1) ? '' : '<C-e>'
+" TBD: scroll up
+" inoremap <expr> <C-e> ScrollPopup(-1) ? '' : '<C-e>'
+
+
+" -----------------------------------------------------------------------------
 " -> helper_functions
 " -----------------------------------------------------------------------------
 " Returns true if paste mode is enabled
@@ -385,4 +415,32 @@ function! VisualSelection(direction, extra_filter) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+" from https://fortime.ws/blog/2020/03/14/20200312-01/
+function! ScrollPopup(down)
+    let winid = popup_findinfo()
+    if winid == 0
+        return 0
+    endif
+
+    " if the popup window is hidden, bypass the keystrokes
+    let pp = popup_getpos(winid)
+    if pp.visible != 1
+        return 0
+    endif
+
+    let firstline = pp.firstline + a:down
+    let buf_lastline = str2nr(trim(win_execute(winid, "echo line('$')")))
+    if firstline < 1
+        let firstline = 1
+    elseif pp.lastline + a:down > buf_lastline
+        let firstline = firstline - a:down + buf_lastline - pp.lastline
+    endif
+
+    " The appear of scrollbar will change the layout of the content which will
+    " cause inconsistent height.
+    call popup_setoptions( winid, {'scrollbar': 0, 'firstline' : firstline } )
+
+    return 1
 endfunction
