@@ -29,11 +29,15 @@ inoremap <buffer> $i import
 inoremap <buffer> $p print
 inoremap <buffer> $f # --- <esc>a
 
-" cmd
+" run
 noremap <buffer> <leader>r :Dispatch python %<cr>
+
+" sort importation
+noremap <buffer> <leader>s :Dispatch isort %<cr>
 
 " ale
 " Check Python files with flake8 and pylint.
 let b:ale_linters = ['pylint']
 " Fix Python files with autopep8 and yapf.
-let b:ale_fixers = ['yapf', 'isort']
+" can only accept one fixer for PEP 582 packages
+let b:ale_fixers = ['yapf']

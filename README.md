@@ -44,6 +44,8 @@ Prerequisites:
     brew install llvm cmake go python macvim
     ```
 
+   - install `mono` [here](https://www.mono-project.com/download/stable/)
+
    - install compilers:
 
     ```sh

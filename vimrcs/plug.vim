@@ -31,6 +31,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tomasr/molokai'
 Plug 'AlessandroYorba/Sierra'
 Plug 'morhetz/gruvbox'  " STAR
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 
@@ -135,6 +136,7 @@ nnoremap <leader>f :ALEFix<CR>
 let g:ycm_filetype_whitelist = {
     \ "c":1,
     \ "cpp":1,
+    \ "cs": 1,
     \ "objc":1,
     \ "sh":1,
     \ "zsh":1,
