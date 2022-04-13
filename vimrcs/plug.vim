@@ -25,6 +25,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/LargeFile'
 Plug 'cespare/vim-toml'
 Plug 'plasticboy/vim-markdown'
+Plug 'dhruvasagar/vim-table-mode'
 " " UI
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
