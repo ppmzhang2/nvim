@@ -6,7 +6,7 @@ let b:table_mode_header_fillchar='='
 " support tagbar
 let g:tagbar_type_rst = {
     \ 'ctagstype': 'rst',
-    \ 'ctagsbin' : '~/.vim/bin/rst2ctags.py',
+    \ 'ctagsbin' : '~/.config/nvim/bin/rst2ctags.py',
     \ 'ctagsargs' : '-f - --sort=yes --sro=»',
     \ 'kinds' : [
         \ 's:sections',

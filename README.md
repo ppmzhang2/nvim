@@ -1,54 +1,34 @@
 # The Vim Configuration
 
-This is a unified Vim configuration for all my devices, inspired by [the ultimate vimrc](https://github.com/amix/vimrc).
+This is a unified Neovim configuration for all my devices, inspired by
+[the ultimate vimrc](https://github.com/amix/vimrc).
 
-## Install
+## Prerequisites
 
-Prerequisites:
-
-- `vim-devicons`
-  - [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts#font-installation) to avoid break
-- `YouCompleteMe`
-  - `llvm` for `clang` support
-  - `clang-format` for c / cpp formatting
 - `fzf`
   - `fzf` for `:FZF`
   - `ripgrep` for `:Rg`
   - `the_silver_searcher` for `:Ag`
+- `tagbar`
+  - `ctags`
+- LSP and linting (optional)
+  - `llvm` for `clang` support
+  - `clang-format`
 
-1. Clone the configuration files to folder `~/.vim`:
+## Installation
 
-   `rm -rf ~/.vim && git clone https://github.com/ppmzhang2/vimrc.git ~/.vim`
-
-2. Set up `vim-plug`:
+1. Clone the configuration files to folder `~/.config`:
 
    ```sh
-   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+   rm -rf ~/.config/nvim
+   git clone https://github.com/ppmzhang2/nvim.git ~/.config/nvim
    ```
 
-3. Edit `~/.vimrc` to include them:
+2. Set up `packer.vim`:
 
-    ```vim
-    source ~/.vim/vimrcs/basic.vim
-    source ~/.vim/vimrcs/plug.vim
-    source ~/.vim/vimrcs/langs.vim
-    source ~/.vim/vimrcs/extended.vim
-    ```
+   ```sh
+   git clone --depth 1 https://github.com/wbthomason/packer.nvim \
+   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+   ```
 
-4. Update plugins.
-5. Install **YouCompleteMe** compilers from [instruction](https://github.com/ycm-core/YouCompleteMe#installation):
-   - install dependency:
-
-    ```sh
-    brew install llvm cmake go python macvim
-    ```
-
-   - install `mono` [here](https://www.mono-project.com/download/stable/)
-
-   - install compilers:
-
-    ```sh
-    cd ~/.vim/plugged/YouCompleteMe
-    ./install.py --cs-completer --go-completer --rust-completer --clangd-completer
-    ```
+4. `PackerInstall` and `PackerCompile`
