@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 """
-Copyright (C) 2013-2020 John Szakmeister <john@szakmeister.net>
+borrowed from jszakmeister/markdown2ctags
+
+Copyright (C) 2013-2018 John Szakmeister <john@szakmeister.net>
 All rights reserved.
 
 This software is licensed as described in the file LICENSE.txt, which
 you should have received as part of this distribution.
-https://github.com/jszakmeister/rst2ctags/blob/master/rst2ctags.py
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
+from __future__ import absolute_import, print_function
 
 import codecs
 import errno
@@ -17,8 +17,9 @@ import io
 import locale
 import re
 import sys
+from optparse import OptionParser
 
-__version__ = "0.2.7.dev0"
+__version__ = "0.3.4.dev0"
 
 
 class ScriptError(Exception):
@@ -112,8 +113,8 @@ class Tag(object):
         return '\t'.join(formatted_fields)
 
     def render(self):
-        return '%s\t%s\t%s;"\t%s' % (self.tag_name, self.tag_file,
-                                     self.tag_address, self._format_fields())
+        return (f'{self.tag_name}\t{self.tag_file}\t{self.tag_address};'
+                f'"\t{self._format_fields()}')
 
     def __repr__(self):
         return "<Tag name:%s file:%s: addr:%s %s>" % (
@@ -185,70 +186,82 @@ def pop_sections(sections, level):
             return
 
 
-heading_re = re.compile(r'''^([-=~:^"#*._+`'])\1+$''')
-subject_re = re.compile(r'^[^\s]+.*$')
+atx_heading_re = re.compile(r'^(#+)\s+(.*?)(?:\s+#+)?\s*$')
+settext_heading_re = re.compile(r'^[-=]+$')
+settext_subject_re = re.compile(r'^[^\s]+.*$')
 
 
 def find_sections(filename, lines):
     sections = []
+    in_code_block = False
+    beyond_front_matter = False
+    in_front_matter = False
 
     previous_sections = []
-    level_values = {}
-    level = 0
 
     for i, line in enumerate(lines):
-        if i == 0:
-            continue
-
-        if heading_re.match(line) and subject_re.match(lines[i - 1]):
-            if i >= 2:
-                top_line = lines[i - 2]
-            else:
-                top_line = ''
-
-            # If the heading line is to short, then docutils doesn't consider
-            # it a heading.
-            if len(line) < len(lines[i - 1]):
+        # Some markdown-based tools allow for "front matter" at the beginning
+        # of the file.  The data is demarcated by a leading and trailing triple
+        # hyphen (---) on its own line.  The tools I've looked at, like Jekyll,
+        # expect this to start on the first line.  So here's an attempt to skip
+        # over the front matter and only tag the remaining part of the file.
+        if not beyond_front_matter:
+            if line == "":
+                continue
+            elif line == '---':
+                in_front_matter = not in_front_matter
                 continue
 
-            name = lines[i - 1].strip()
-            key = line[0]
+            if not in_front_matter and line:
+                beyond_front_matter = True
 
-            if heading_re.match(top_line):
-                # If there is an overline, it must match the bottom line.
-                if top_line != line:
-                    # Not a heading.
-                    continue
-                # We have an overline, so double up.
-                key = key + key
+        # Skip GitHub Markdown style code blocks.
+        if line.startswith("```"):
+            in_code_block = not in_code_block
+            continue
 
-            if key not in level_values:
-                level_values[key] = level + 1
+        if in_code_block:
+            continue
 
-            level = level_values[key]
+        m = atx_heading_re.match(line)
+        if m:
+            level = len(m.group(1))
+            name = m.group(2)
 
             pop_sections(previous_sections, level)
             if previous_sections:
                 parent = previous_sections[-1]
             else:
                 parent = None
-            line_number = i
+            line_number = i + 1
 
-            s = Section(level, name, lines[i - 1], line_number, filename,
-                        parent)
+            s = Section(level, name, line, line_number, filename, parent)
             previous_sections.append(s)
             sections.append(s)
+        else:
+            m = settext_heading_re.match(line)
+            if i and m:
+                if not settext_subject_re.match(lines[i - 1]):
+                    continue
 
-            # Blank lines to help correctly detect:
-            #    foo
-            #    ===
-            #    bar
-            #    ===
-            #
-            # as two underline style headings.
-            lines[i] = lines[i - 1] = ''
-            if top_line:
-                lines[i - 2] = ''
+                name = lines[i - 1].strip()
+
+                if line[0] == '=':
+                    level = 1
+                else:
+                    level = 2
+
+                pop_sections(previous_sections, level)
+                if previous_sections:
+                    parent = previous_sections[-1]
+                else:
+                    parent = None
+                line_number = i
+
+                s = Section(level, name, lines[i - 1], line_number, filename,
+                            parent)
+                previous_sections.append(s)
+                sections.append(s)
 
     return sections
 
@@ -287,8 +300,6 @@ def gen_tags_content(output, sort, tags):
 
 
 def main():
-    from optparse import OptionParser
-
     parser = OptionParser(usage="usage: %prog [options] file(s)",
                           version=__version__)
     parser.add_option(
@@ -331,12 +342,9 @@ def main():
 
     options, args = parser.parse_args()
 
-    if not args:
-        raise ScriptError("No input files specified.")
-
     if sys.version_info[0] == 2:
-        encoding = sys.stdin.encoding or locale.getpreferredencoding(
-        ) or 'utf-8'
+        encoding = (sys.stdin.encoding or locale.getpreferredencoding()
+                    or 'utf-8')
         options.sro = options.sro.decode(encoding)
 
     if options.tagfile == '-':
@@ -359,10 +367,10 @@ def main():
             try:
                 with open_autoenc(filename, encoding=options.encoding) as f:
                     buf = f.read()
-            except IOError as e:
-                if e.errno == errno.EPIPE:
+            except IOError as err:
+                if err.errno == errno.EPIPE:
                     raise
-                print_warning(e)
+                print_warning(err)
                 continue
 
             lines = buf.splitlines()
@@ -380,25 +388,24 @@ def main():
     output.close()
 
 
-def print_warning(e):
-    print("WARNING: %s" % str(e), file=sys.stderr)
+def print_warning(err):
+    print(f"WARNING: {err}", file=sys.stderr)
 
 
-def print_error(e):
-    print("ERROR: %s" % str(e), file=sys.stderr)
+def print_error(err):
+    print(f"ERROR: {err}", file=sys.stderr)
 
 
 def cli_main():
     try:
         main()
-    except IOError as e:
-        if e.errno == errno.EPIPE:
+    except IOError as err:
+        if err.errno == errno.EPIPE:
             # Exit saying we got SIGPIPE.
             sys.exit(141)
-        print_error(e)
-        sys.exit(1)
-    except ScriptError as e:
-        print_error(e)
+        raise
+    except ScriptError as err:
+        print(f"ERROR: {err}", file=sys.stderr)
         sys.exit(1)
 
 
