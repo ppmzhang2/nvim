@@ -12,9 +12,11 @@ This is a unified Neovim configuration for all my devices, inspired by
 - `tagbar`
   - `ctags`
 - LSP and `ALE` linting (optional)
-  - `llvm` for `clang` support
-  - `clang-format`
-  - `shellcheck`
+  - `clang`: `llvm` and `clang-format`
+  - `shell`: `shellcheck` (linting)
+  - `lua`: `lua-language-server`
+  - `rust`: `rust-analyzer`
+  - `python`: `jedi-language-server`, `yapf`, `isort`, `pylint`
 
 ## Installation
 

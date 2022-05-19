@@ -49,6 +49,10 @@ require 'lspconfig'.clangd.setup {
     cmd = { "/opt/homebrew/opt/llvm/bin/clangd" },
 }
 
+require 'lspconfig'.rust_analyzer.setup {
+    on_attach = on_attach,
+}
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
