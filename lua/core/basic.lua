@@ -24,6 +24,29 @@ vim.api.nvim_set_keymap('n', 'j', 'jzz', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', 'k', 'kzz', { noremap = true, silent = false })
 
 -- ============================================================================
+-- tab_and_indent
+-- ============================================================================
+vim.cmd([[
+" Use spaces instead of tabs
+set expandtab
+" Be smart when using tabs ;)
+set smarttab
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+]])
+
+-- ============================================================================
+-- spell_checking
+-- ============================================================================
+-- spell-checking for EN and DE
+vim.api.nvim_command('set spelllang=en,de')
+-- pressing ,ss will toggle and untoggle spell checking
+vim.api.nvim_set_keymap('n', '<leader>ss', ':setlocal spell!<cr>',
+    { noremap = true, silent = false })
+
+
+-- ============================================================================
 -- user_interface
 -- ============================================================================
 vim.api.nvim_command('set number')
@@ -36,17 +59,17 @@ vim.api.nvim_command('set so=7')
 
 -- search
 vim.cmd([[
-  set ignorecase
-  " when searching try to be smart about cases
-  set smartcase
-  " highlight search results
-  set hlsearch
-  " makes search act like search in modern browsers
-  set incsearch
-  " don't redraw while executing macros (good performance config)
-  set lazyredraw
-  " for regular expressions turn magic on
-  set magic
+set ignorecase
+" when searching try to be smart about cases
+set smartcase
+" highlight search results
+set hlsearch
+" makes search act like search in modern browsers
+set incsearch
+" don't redraw while executing macros (good performance config)
+set lazyredraw
+" for regular expressions turn magic on
+set magic
 ]])
 
 -- return to last edit position when opening files (you want this!)

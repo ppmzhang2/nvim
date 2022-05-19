@@ -9,6 +9,6 @@ let g:tagbar_vertical = 0
 ]])
 
 vim.api.nvim_set_keymap('n', '<C-S>w', ':TagbarToggle<cr>', {
-  noremap = true,
-  silent = false,
+    noremap = true,
+    silent = false,
 })
