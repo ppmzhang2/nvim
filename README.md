@@ -6,10 +6,8 @@ vimrc](https://github.com/amix/vimrc).
 ## Prerequisites
 
 - `tree-sitter`
-- `fzf`
-  - `fzf`
+- `telescope` fuzzy finder
   - `ripgrep`
-  - `the_silver_searcher`
 - `tagbar`
   - `ctags`
 - LSP
