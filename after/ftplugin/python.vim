@@ -12,13 +12,6 @@ endfunction
 " use PEP582 style local package
 call ConfigPath()
 
-" folding
-setlocal foldmethod=indent
-setlocal foldnestmax=2
-
-" default open all folds
-setlocal foldlevel=99
-
 " run
 noremap <buffer> <leader>r :Dispatch python %<cr>
 " fixer

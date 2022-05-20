@@ -1,7 +1,7 @@
 # A Neovim Configuration
 
-This is a unified Neovim configuration for all my devices, inspired by
-[the ultimate vimrc](https://github.com/amix/vimrc).
+This is a unified Neovim configuration inspired by [the ultimate
+vimrc](https://github.com/amix/vimrc).
 
 ## Prerequisites
 
@@ -20,7 +20,7 @@ This is a unified Neovim configuration for all my devices, inspired by
     [here](./python_lsp_setup.md))
 - linting
   - `clang-format`
-  - `shellcheck` (linting)
+  - `shellcheck`
   - `pylint`, `yapf`, `isort`
 
 ## Installation
