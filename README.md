@@ -14,12 +14,13 @@ vimrc](https://github.com/amix/vimrc).
   - `llvm`
   - `lua-language-server`
   - `rust-analyzer`
-  - `pyright` or `jedi-language-server` (setup guide can be found
-    [here](./python_lsp_setup.md))
+  - `pyright`, `jedi-language-server`
 - linting
-  - `clang-format`
   - `shellcheck`
-  - `pylint`, `yapf`, `isort`
+  - `pylint`
+- formatter
+  - `clang-format`
+  - `yapf`, `isort` 
 
 ## Installation
 
@@ -38,6 +39,10 @@ vimrc](https://github.com/amix/vimrc).
    ```
 
 4. `PackerInstall` and `PackerCompile`
+
+## LSP Setup
+
+- [python](./python_lsp_setup.md)
 
 ## Reference
 
