@@ -5,6 +5,7 @@ This is a unified Neovim configuration for all my devices, inspired by
 
 ## Prerequisites
 
+- `tree-sitter`
 - `fzf`
   - `fzf` for `:FZF`
   - `ripgrep` for `:Rg`
