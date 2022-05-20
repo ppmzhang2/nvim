@@ -34,8 +34,13 @@ return require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
 
-    -- syntax
+    -- LSP
     use 'neovim/nvim-lspconfig'
+    use 'hrsh7th/nvim-cmp'  -- autocompletion plugin
+    use 'hrsh7th/cmp-nvim-lsp'  -- LSP source for nvim-cmp
+    use 'hrsh7th/vim-vsnip'
+
+    -- syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", }
     use 'mfussenegger/nvim-lint'
 
