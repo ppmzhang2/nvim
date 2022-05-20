@@ -7,17 +7,21 @@ This is a unified Neovim configuration for all my devices, inspired by
 
 - `tree-sitter`
 - `fzf`
-  - `fzf` for `:FZF`
-  - `ripgrep` for `:Rg`
-  - `the_silver_searcher` for `:Ag`
+  - `fzf`
+  - `ripgrep`
+  - `the_silver_searcher`
 - `tagbar`
   - `ctags`
-- LSP and `ALE` linting (optional)
-  - `clang`: `llvm` and `clang-format`
-  - `shell`: `shellcheck` (linting)
-  - `lua`: `lua-language-server`
-  - `rust`: `rust-analyzer`
-  - `python`: `jedi-language-server`, `yapf`, `isort`, `pylint`
+- LSP
+  - `llvm`
+  - `lua-language-server`
+  - `rust-analyzer`
+  - `pyright` or `jedi-language-server` (setup guide can be found
+    [here](./python_lsp_setup.md))
+- linting
+  - `clang-format`
+  - `shellcheck` (linting)
+  - `pylint`, `yapf`, `isort`
 
 ## Installation
 

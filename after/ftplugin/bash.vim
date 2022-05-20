@@ -1,3 +1,1 @@
-" ale
-" check shell scripts with shellcheck
-let b:ale_linters = ['shellcheck']
+au BufWritePost <buffer> lua require('lint').try_lint()

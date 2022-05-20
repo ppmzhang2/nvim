@@ -56,6 +56,9 @@ vim.api.nvim_command('set ruler')
 vim.api.nvim_command('set foldcolumn=1')
 -- set 7 lines to the cursor - when moving vertically using j/k
 vim.api.nvim_command('set so=7')
+-- always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appear/become resolved.
+vim.api.nvim_command('set signcolumn=yes')
 
 -- search
 vim.cmd([[
