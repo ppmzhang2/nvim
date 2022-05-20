@@ -39,9 +39,13 @@ local on_attach = function(_, bufnr)
         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
 end
 
-require 'lspconfig'.jedi_language_server.setup {
+-- require 'lspconfig'.jedi_language_server.setup {
+--     on_attach = on_attach,
+--     cmd = { "jedi-language-server" },
+-- }
+
+require 'lspconfig'.pyright.setup {
     on_attach = on_attach,
-    cmd = { "jedi-language-server" },
 }
 
 require 'lspconfig'.clangd.setup {

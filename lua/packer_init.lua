@@ -16,16 +16,6 @@ return require('packer').startup(function(use)
     use 'ervandew/supertab'
     use 'preservim/tagbar'
 
-    -- Load on a combination of conditions: specific filetypes or commands
-    -- Also run code after load (see the "config" key)
-    use {
-        'dense-analysis/ale',
-        ft = { 'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown',
-            'python', 'racket', 'vim', 'tex', },
-        cmd = 'ALEEnable',
-        config = 'vim.cmd[[ALEEnable]]'
-    }
-
     -- fuzzy finder
     use { 'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
     use { 'junegunn/fzf.vim' }
@@ -44,5 +34,6 @@ return require('packer').startup(function(use)
     -- syntax
     use 'neovim/nvim-lspconfig'
     use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", }
+    use 'mfussenegger/nvim-lint'
 
 end)
