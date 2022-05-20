@@ -11,9 +11,7 @@ return require('packer').startup(function(use)
     use 'tpope/vim-dispatch'
     use {
         'kyazdani42/nvim-tree.lua',
-        requires = {
-            'kyazdani42/nvim-web-devicons', -- optional, for file icon
-        },
+        requires = { 'kyazdani42/nvim-web-devicons' } -- optional file icon
     }
     use 'ervandew/supertab'
     use 'preservim/tagbar'
@@ -22,20 +20,8 @@ return require('packer').startup(function(use)
     -- Also run code after load (see the "config" key)
     use {
         'dense-analysis/ale',
-        ft = {
-            'sh',
-            'zsh',
-            'bash',
-            'c',
-            'cpp',
-            'cmake',
-            'html',
-            'markdown',
-            'python',
-            'racket',
-            'vim',
-            'tex'
-        },
+        ft = { 'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown',
+            'python', 'racket', 'vim', 'tex', },
         cmd = 'ALEEnable',
         config = 'vim.cmd[[ALEEnable]]'
     }
@@ -57,5 +43,6 @@ return require('packer').startup(function(use)
 
     -- syntax
     use 'neovim/nvim-lspconfig'
+    use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", }
 
 end)
