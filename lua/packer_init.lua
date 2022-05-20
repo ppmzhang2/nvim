@@ -17,8 +17,11 @@ return require('packer').startup(function(use)
     use 'preservim/tagbar'
 
     -- fuzzy finder
-    use { 'junegunn/fzf', dir = '~/.fzf', run = './install --all' }
-    use { 'junegunn/fzf.vim' }
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { 'nvim-lua/plenary.nvim' }
+    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- git
     use 'tpope/vim-fugitive'
