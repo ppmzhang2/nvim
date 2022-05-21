@@ -8,15 +8,14 @@ you should have received as part of this distribution.
 https://github.com/jszakmeister/rst2ctags/blob/master/rst2ctags.py
 """
 
-from __future__ import absolute_import
-from __future__ import print_function
+from __future__ import absolute_import, print_function
 
 import codecs
 import errno
 import io
-import locale
 import re
 import sys
+from optparse import OptionParser
 
 __version__ = "0.2.7.dev0"
 
@@ -42,26 +41,10 @@ def detect_encoding(filename):
     # No BOM found, let's try to detect encoding
     encoding = None
     try:
-        import chardet
-
-        result = chardet.detect(raw)
-
-        # If we're not really confident about the encoding, then skip to
-        # UTF-8 detection.
-        if result['confidence'] >= 0.9:
-            encoding = result['encoding']
-
-        if encoding == 'ascii':
-            encoding = 'utf-8'
-    except ImportError:
+        raw.rsplit(b' ')[0].decode('utf-8')
+        encoding = 'utf-8'
+    except UnicodeDecodeError:
         pass
-
-    if encoding is None:
-        try:
-            raw.rsplit(b' ')[0].decode('utf-8')
-            encoding = 'utf-8'
-        except UnicodeDecodeError:
-            pass
 
     return encoding or 'latin1'
 
@@ -72,23 +55,23 @@ def open_autoenc(filename, encoding=None):
     return io.open(filename, encoding=encoding, newline='')
 
 
-def ctag_name_escape(str):
-    str = re.sub('[\t\r\n]+', ' ', str)
-    str = re.sub(r'^\s*\\\((.)\)', r'(\1)', str)
-    return str
+def ctag_name_escape(s):
+    s = re.sub('[\t\r\n]+', ' ', s)
+    s = re.sub(r'^\s*\\\((.)\)', r'(\1)', s)
+    return s
 
 
-def ctag_search_escape(str):
-    str = str.replace('\\', r'\\')
-    str = str.replace('\t', r'\t')
-    str = str.replace('\r', r'\r')
-    str = str.replace('\n', r'\n')
+def ctag_search_escape(s):
+    s = s.replace('\\', r'\\')
+    s = s.replace('\t', r'\t')
+    s = s.replace('\r', r'\r')
+    s = s.replace('\n', r'\n')
     for c in '[]*$.^':
-        str = str.replace(c, '\\' + c)
-    return str
+        s = s.replace(c, '\\' + c)
+    return s
 
 
-class Tag(object):
+class Tag:
 
     def __init__(self, tag_name, tag_file, tag_address):
         self.tag_name = tag_name
@@ -96,24 +79,24 @@ class Tag(object):
         self.tag_address = tag_address
         self.fields = []
 
-    def add_field(self, type, value=None):
-        if type == 'kind':
-            type = None
-        self.fields.append((type, value or ""))
+    def add_field(self, cate, value=None):
+        if cate == 'kind':
+            cate = None
+        self.fields.append((cate, value or ""))
 
     def _format_fields(self):
         formatted_fields = []
         for name, value in self.fields:
             if name:
-                s = '%s:%s' % (name, value or "")
+                s = f'{name}:{value or ""}'
             else:
                 s = str(value)
             formatted_fields.append(s)
         return '\t'.join(formatted_fields)
 
     def render(self):
-        return '%s\t%s\t%s;"\t%s' % (self.tag_name, self.tag_file,
-                                     self.tag_address, self._format_fields())
+        return (f'{self.tag_name}\t{self.tag_file}\t{self.tag_address};"'
+                f'\t{self._format_fields()}')
 
     def __repr__(self):
         return "<Tag name:%s file:%s: addr:%s %s>" % (
@@ -145,7 +128,7 @@ class Tag(object):
     @staticmethod
     def section(section, sro):
         tag_name = ctag_name_escape(section.name)
-        tag_address = '/^%s$/' % ctag_search_escape(section.line)
+        tag_address = f'/^{ctag_search_escape(section.line)}$/'
         t = Tag(tag_name, section.filename, tag_address)
         t.add_field('kind', 's')
         t.add_field('line', section.line_number)
@@ -163,7 +146,7 @@ class Tag(object):
         return t
 
 
-class Section(object):
+class Section:
 
     def __init__(self, level, name, line, line_number, filename, parent=None):
         self.level = level
@@ -174,7 +157,7 @@ class Section(object):
         self.parent = parent
 
     def __repr__(self):
-        return '<Section %s %d %d>' % (self.name, self.level, self.line_number)
+        return f'<Section {self.name} {self.level:d} {self.line_number:d}>'
 
 
 def pop_sections(sections, level):
@@ -287,8 +270,6 @@ def gen_tags_content(output, sort, tags):
 
 
 def main():
-    from optparse import OptionParser
-
     parser = OptionParser(usage="usage: %prog [options] file(s)",
                           version=__version__)
     parser.add_option(
@@ -334,16 +315,8 @@ def main():
     if not args:
         raise ScriptError("No input files specified.")
 
-    if sys.version_info[0] == 2:
-        encoding = sys.stdin.encoding or locale.getpreferredencoding(
-        ) or 'utf-8'
-        options.sro = options.sro.decode(encoding)
-
     if options.tagfile == '-':
-        if sys.version_info[0] == 2:
-            output = sys.stdout
-        else:
-            output = sys.stdout.buffer
+        output = sys.stdout.buffer
     else:
         output = open(options.tagfile, 'wb')
 
@@ -353,9 +326,6 @@ def main():
 
     try:
         for filename in args:
-            if sys.version_info[0] == 2:
-                filename = filename.decode(sys.getfilesystemencoding())
-
             try:
                 with open_autoenc(filename, encoding=options.encoding) as f:
                     buf = f.read()
@@ -381,11 +351,11 @@ def main():
 
 
 def print_warning(e):
-    print("WARNING: %s" % str(e), file=sys.stderr)
+    print(f"WARNING: {e}", file=sys.stderr)
 
 
 def print_error(e):
-    print("ERROR: %s" % str(e), file=sys.stderr)
+    print(f"ERROR: {e}", file=sys.stderr)
 
 
 def cli_main():
