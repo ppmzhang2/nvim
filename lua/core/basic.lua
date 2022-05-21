@@ -1,9 +1,21 @@
 -- ============================================================================
--- general_setting
+-- helpers
+-- ============================================================================
+-- local cmd = vim.cmd  -- to execute Vim commands e.g. cmd('pwd')
+-- local fn = vim.fn    -- to call Vim functions e.g. fn.bufnr()
+-- local g = vim.g      -- a table to access global variables
+-- local opt = vim.opt  -- to set options
+--
+-- reference
+-- 1. https://oroques.dev/2020/01/07/neovim-05.html
+
+
+-- ============================================================================
+-- general
 -- ============================================================================
 -- 4s delay is too much
 -- used by YCM hover, nerdtree-git-plugin, etc.
-vim.opt.updatetime = 100
+vim.o.updatetime = 100
 
 -- how many lines of history VIM has to remember
 vim.g.history = 500
@@ -12,10 +24,6 @@ vim.g.history = 500
 -- like <leader>w saves the current file
 vim.g.mapleader = ','
 
--- set to auto read when a file is changed from the outside
-vim.api.nvim_command('set autoread')
-vim.api.nvim_command('au FocusGained,BufEnter * checktime')
-
 -- to avoid the extra 'shift' keypress when typing the colon
 vim.api.nvim_set_keymap('n', ';', ':', { noremap = true, silent = false })
 
@@ -23,24 +31,40 @@ vim.api.nvim_set_keymap('n', ';', ':', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', 'j', 'jzz', { noremap = true, silent = false })
 vim.api.nvim_set_keymap('n', 'k', 'kzz', { noremap = true, silent = false })
 
+-- completion option
+vim.o.completeopt = 'menu,menuone,noselect'
+
+
+-- ============================================================================
+-- buffer
+-- ============================================================================
+-- set to auto read when a file is changed from the outside
+vim.api.nvim_command('set autoread')
+vim.api.nvim_command('au FocusGained,BufEnter * checktime')
+
+-- return to last edit position when opening files (you want this!)
+vim.cmd([[
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+]])
+
+
 -- ============================================================================
 -- tab_and_indent
 -- ============================================================================
-vim.cmd([[
-" Use spaces instead of tabs
-set expandtab
-" Be smart when using tabs ;)
-set smarttab
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-]])
+-- use spaces instead of tabs
+vim.o.expandtab = true
+-- 1 tab == 4 spaces
+vim.o.shiftwidth = 4
+vim.o.tabstop = 4
+-- be smart when using tabs ;)
+vim.o.smarttab = true
+
 
 -- ============================================================================
 -- spell_checking
 -- ============================================================================
 -- spell-checking for EN and DE
-vim.api.nvim_command('set spelllang=en,de')
+vim.o.spelllang = 'en,de'
 -- pressing ,ss will toggle and untoggle spell checking
 vim.api.nvim_set_keymap('n', '<leader>ss', ':setlocal spell!<cr>',
     { noremap = true, silent = false })
@@ -49,33 +73,32 @@ vim.api.nvim_set_keymap('n', '<leader>ss', ':setlocal spell!<cr>',
 -- ============================================================================
 -- user_interface
 -- ============================================================================
-vim.api.nvim_command('set number')
+-- line number
+vim.o.number = true
+-- true color support
+vim.o.termguicolors = true
 -- always show current position
-vim.api.nvim_command('set ruler')
--- add a bit extra margin to the left
-vim.api.nvim_command('set foldcolumn=1')
+vim.o.ruler = true
+-- show folding level
+vim.o.foldcolumn = '1'
 -- set 7 lines to the cursor - when moving vertically using j/k
-vim.api.nvim_command('set so=7')
+vim.o.scrolloff = 7
 -- always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appear/become resolved.
-vim.api.nvim_command('set signcolumn=yes')
+vim.o.signcolumn = 'yes'
 
+
+-- ============================================================================
 -- search
-vim.cmd([[
-set ignorecase
-" when searching try to be smart about cases
-set smartcase
-" highlight search results
-set hlsearch
-" makes search act like search in modern browsers
-set incsearch
-" don't redraw while executing macros (good performance config)
-set lazyredraw
-" for regular expressions turn magic on
-set magic
-]])
-
--- return to last edit position when opening files (you want this!)
-vim.cmd([[
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-]])
+-- ============================================================================
+-- when searching try to be smart about cases
+vim.o.ignorecase = true
+vim.o.smartcase = true
+-- highlight search results
+vim.o.hlsearch = true
+-- makes search act like search in modern browsers
+vim.o.incsearch = true
+-- don't redraw while executing macros (good performance config)
+vim.o.lazyredraw = true
+-- for regular expressions turn magic on
+vim.o.magic = true
