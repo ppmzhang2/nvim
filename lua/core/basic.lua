@@ -41,6 +41,7 @@ vim.o.completeopt = 'menu,menuone,noselect'
 -- set to auto read when a file is changed from the outside
 vim.api.nvim_command('set autoread')
 vim.api.nvim_command('au FocusGained,BufEnter * checktime')
+vim.api.nvim_command('set guifont=Hack_Nerd_Font_Mono:h16')
 
 -- return to last edit position when opening files (you want this!)
 vim.cmd([[
