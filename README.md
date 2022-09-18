@@ -43,6 +43,7 @@ vimrc](https://github.com/amix/vimrc).
 ## LSP Setup
 
 - [python](./python_lsp_setup.md)
+- [ocaml](./ocaml_lsp_setup.md)
 
 ## Reference
 

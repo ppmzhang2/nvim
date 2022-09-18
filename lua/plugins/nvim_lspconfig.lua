@@ -69,6 +69,14 @@ lspconfig.rust_analyzer.setup {
     capabilities = capabilities,
 }
 
+lspconfig.ocamllsp.setup {
+    -- root_dir = lspconfig.util.root_pattern("*.opam",
+    --     "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
+    root_dir = lspconfig.util.root_pattern(".ocamlformat"),
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
