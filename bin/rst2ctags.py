@@ -329,10 +329,10 @@ def main():
             try:
                 with open_autoenc(filename, encoding=options.encoding) as f:
                     buf = f.read()
-            except IOError as e:
-                if e.errno == errno.EPIPE:
+            except IOError as err:
+                if err.errno == errno.EPIPE:
                     raise
-                print_warning(e)
+                print_warning(err)
                 continue
 
             lines = buf.splitlines()
@@ -350,25 +350,24 @@ def main():
     output.close()
 
 
-def print_warning(e):
-    print(f"WARNING: {e}", file=sys.stderr)
+def print_warning(err):
+    print(f"WARNING: {err}", file=sys.stderr)
 
 
-def print_error(e):
-    print(f"ERROR: {e}", file=sys.stderr)
+def print_error(err):
+    print(f"ERROR: {err}", file=sys.stderr)
 
 
 def cli_main():
     try:
         main()
-    except IOError as e:
-        if e.errno == errno.EPIPE:
+    except IOError as err:
+        if err.errno == errno.EPIPE:
             # Exit saying we got SIGPIPE.
             sys.exit(141)
-        print_error(e)
-        sys.exit(1)
-    except ScriptError as e:
-        print_error(e)
+        raise
+    except ScriptError as err:
+        print(f"ERROR: {err}", file=sys.stderr)
         sys.exit(1)
 
 

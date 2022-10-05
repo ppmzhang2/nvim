@@ -35,7 +35,7 @@ local on_attach = function(_, bufnr)
     buf_keymap('<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
     buf_keymap('<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>')
     buf_keymap('gr', '<cmd>lua vim.lsp.buf.references()<CR>')
-    buf_keymap('<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+    buf_keymap('<space>f', '<cmd>lua vim.lsp.buf.format{async=true}<CR>')
     buf_keymap('<space>wr',
         '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
     buf_keymap('<space>wl',
@@ -67,6 +67,26 @@ lspconfig.clangd.setup {
 lspconfig.rust_analyzer.setup {
     on_attach = on_attach,
     capabilities = capabilities,
+}
+
+lspconfig.julials.setup {
+    root_dir = lspconfig.util.root_pattern("Project.toml"),
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "julia",
+        "--startup-file=no",
+        "--history-file=no",
+        "-e",
+        'using LanguageServer\n' ..
+            'depot_path = joinpath(homedir(), ".julia")\n' ..
+            'project_path = pwd()\n' ..
+            '@info "Running language server" ' ..
+            '    VERSION pwd() project_path depot_path\n' ..
+            'server = LanguageServer.LanguageServerInstance(' ..
+            '    stdin, stdout, project_path, depot_path)\n' ..
+            'server.runlinter = true\n' ..
+            'run(server)\n',
+    },
 }
 
 lspconfig.ocamllsp.setup {

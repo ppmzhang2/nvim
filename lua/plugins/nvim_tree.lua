@@ -29,7 +29,7 @@ require 'nvim-tree'.setup { -- BEGIN_DEFAULT_OPTS
             },
         },
         float = {
-            enable = false,
+            enable = true,
             open_win_config = {
                 relative = "editor",
                 border = "rounded",
