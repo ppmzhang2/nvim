@@ -10,7 +10,7 @@ Pkg.add("LanguageServer")
 Add to the Neovim configure files once the `nvim-lsconfig` is installed:
 
 ```lua
-lspconfig.julials.setup {
+require 'lspconfig'.julials.setup {
     root_dir = lspconfig.util.root_pattern("Project.toml"),
     on_attach = on_attach,
     capabilities = capabilities,

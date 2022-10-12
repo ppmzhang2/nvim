@@ -45,6 +45,7 @@ vimrc](https://github.com/amix/vimrc).
 - [python](./python_lsp_setup.md)
 - [ocaml](./ocaml_lsp_setup.md)
 - [julia](./julia_lsp_setup.md)
+- [.NET (C# / F#)](./dotnet_lsp_setup.md)
 
 ## Reference
 
