@@ -1,3 +1,5 @@
+vim.opt.shell = "/bin/bash"
+
 require('core/basic')
 require('packer_init')
 require('plugins/ui')
