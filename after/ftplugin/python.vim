@@ -14,5 +14,3 @@ call ConfigPath()
 
 " run
 noremap <buffer> <leader>r :Dispatch python %<cr>
-" fixer
-noremap <buffer> <leader>f :Dispatch isort %<cr> :Dispatch yapf -i %<cr>
