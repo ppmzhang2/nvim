@@ -16,13 +16,10 @@ keymap('[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 keymap(']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 keymap('<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
--- use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
+local function lsp_keymaps(bufnr)
     local buf_keymap = function(lhs, rhs)
         return vim.api.nvim_buf_set_keymap(bufnr, 'n', lhs, rhs, opts)
     end
-
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     buf_keymap('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
@@ -40,6 +37,12 @@ local on_attach = function(_, bufnr)
         '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>')
     buf_keymap('<space>wl',
         '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>')
+end
+
+-- use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(_, bufnr)
+    lsp_keymaps(bufnr)
 end
 
 local lspconfig = require('lspconfig')
@@ -141,3 +144,27 @@ lspconfig.sumneko_lua.setup {
         },
     },
 }
+
+local null_ls = require("null-ls")
+local formatting = null_ls.builtins.formatting
+local hover = null_ls.builtins.hover
+local diagnostics = null_ls.builtins.diagnostics
+
+null_ls.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+    sources = {
+        -- python
+        diagnostics.ruff,
+        formatting.yapf,
+        formatting.isort,
+        -- shell
+        diagnostics.shellcheck,
+        -- fish
+        formatting.fish_indent,
+        -- c/cpp
+        formatting.clang_format,
+        -- dictionary
+        hover.dictionary,
+    },
+})

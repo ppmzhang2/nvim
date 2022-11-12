@@ -39,9 +39,9 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'  -- autocompletion plugin
     use 'hrsh7th/cmp-nvim-lsp'  -- LSP source for nvim-cmp
     use 'hrsh7th/vim-vsnip'
+    use 'jose-elias-alvarez/null-ls.nvim'
 
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", }
-    use 'mfussenegger/nvim-lint'
 
 end)
