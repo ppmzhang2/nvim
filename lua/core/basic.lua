@@ -15,7 +15,7 @@
 -- ============================================================================
 -- 4s delay is too much
 -- used by YCM hover, nerdtree-git-plugin, etc.
-vim.o.updatetime = 100
+vim.o.updatetime = 2000
 
 -- how many lines of history VIM has to remember
 vim.g.history = 500
