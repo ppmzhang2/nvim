@@ -56,10 +56,33 @@ capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 --     cmd = { "jedi-language-server" },
 -- }
 
-lspconfig.pyright.setup {
+lspconfig.jedi_language_server.setup {
     on_attach = on_attach,
     capabilities = capabilities,
+    cmd = { "jedi-language-server" },
+    init_options = {
+        diagnostics = {
+            enable = false,
+        },
+        hover = {
+            enable = true,
+        },
+        workspace = {
+            extraPaths = {
+                "./__pypackages__/3.10/lib"
+            },
+            symbols = {
+                ignoreFolders = { "__pypackages__", "__pycache__", "venv" },
+                maxSymbols = 20
+            }
+        }
+    }
 }
+
+-- lspconfig.pyright.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+-- }
 
 lspconfig.clangd.setup {
     on_attach = on_attach,
