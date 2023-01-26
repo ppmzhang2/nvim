@@ -50,12 +50,6 @@ local lspconfig = require('lspconfig')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- lspconfig.jedi_language_server.setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
---     cmd = { "jedi-language-server" },
--- }
-
 lspconfig.jedi_language_server.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -69,7 +63,9 @@ lspconfig.jedi_language_server.setup {
         },
         workspace = {
             extraPaths = {
-                "./__pypackages__/3.10/lib"
+                "./__pypackages__/3.10/lib",
+                "./__pypackages__/3.11/lib",
+                "./src",
             },
             symbols = {
                 ignoreFolders = { "__pypackages__", "__pycache__", "venv" },
@@ -87,7 +83,7 @@ lspconfig.jedi_language_server.setup {
 lspconfig.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { "/opt/homebrew/opt/llvm/bin/clangd" },
+    cmd = { "clangd" },
 }
 
 lspconfig.rust_analyzer.setup {
@@ -177,17 +173,19 @@ null_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
     sources = {
-        -- python
+        -- -- python
         diagnostics.ruff,
+        -- diagnostics.mypy,
+        -- diagnostics.pylint,
         formatting.yapf,
         formatting.isort,
-        -- shell
+        -- -- shell
         diagnostics.shellcheck,
-        -- fish
+        -- -- fish
         formatting.fish_indent,
-        -- c/cpp
+        -- -- c/cpp
         formatting.clang_format,
-        -- dictionary
+        -- -- dictionary
         hover.dictionary,
     },
 })
