@@ -80,6 +80,19 @@ lspconfig.jedi_language_server.setup {
 --     capabilities = capabilities,
 -- }
 
+lspconfig.dartls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = { "dart", "language-server", "--protocol=lsp" },
+    init_options = {
+        onlyAnalyzeProjectsWithOpenFiles = "true",
+        suggestFromUnimportedLibraries = "true",
+        closingLabels = "true",
+        outline = "true",
+        fluttreOutline = "true",
+    },
+}
+
 lspconfig.clangd.setup {
     on_attach = on_attach,
     capabilities = capabilities,
@@ -100,14 +113,14 @@ lspconfig.julials.setup {
         "--history-file=no",
         "-e",
         'using LanguageServer\n' ..
-            'depot_path = joinpath(homedir(), ".julia")\n' ..
-            'project_path = pwd()\n' ..
-            '@info "Running language server" ' ..
-            '    VERSION pwd() project_path depot_path\n' ..
-            'server = LanguageServer.LanguageServerInstance(' ..
-            '    stdin, stdout, project_path, depot_path)\n' ..
-            'server.runlinter = true\n' ..
-            'run(server)\n',
+        'depot_path = joinpath(homedir(), ".julia")\n' ..
+        'project_path = pwd()\n' ..
+        '@info "Running language server" ' ..
+        '    VERSION pwd() project_path depot_path\n' ..
+        'server = LanguageServer.LanguageServerInstance(' ..
+        '    stdin, stdout, project_path, depot_path)\n' ..
+        'server.runlinter = true\n' ..
+        'run(server)\n',
     },
 }
 
