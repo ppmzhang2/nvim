@@ -55,6 +55,12 @@ lspconfig.jedi_language_server.setup {
     capabilities = capabilities,
     cmd = { "jedi-language-server" },
     init_options = {
+        completion = {
+            enable = false,
+            disable = true,
+            -- disable_snippets = true,
+            resolve_eagerly = false,
+        },
         diagnostics = {
             enable = false,
         },
@@ -80,18 +86,18 @@ lspconfig.jedi_language_server.setup {
 --     capabilities = capabilities,
 -- }
 
-lspconfig.dartls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "dart", "language-server", "--protocol=lsp" },
-    init_options = {
-        onlyAnalyzeProjectsWithOpenFiles = "true",
-        suggestFromUnimportedLibraries = "true",
-        closingLabels = "true",
-        outline = "true",
-        fluttreOutline = "true",
-    },
-}
+-- lspconfig.dartls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { "dart", "language-server", "--protocol=lsp" },
+--     init_options = {
+--         onlyAnalyzeProjectsWithOpenFiles = "true",
+--         suggestFromUnimportedLibraries = "true",
+--         closingLabels = "true",
+--         outline = "true",
+--         fluttreOutline = "true",
+--     },
+-- }
 
 lspconfig.clangd.setup {
     on_attach = on_attach,
@@ -104,25 +110,25 @@ lspconfig.rust_analyzer.setup {
     capabilities = capabilities,
 }
 
-lspconfig.julials.setup {
-    root_dir = lspconfig.util.root_pattern("Project.toml"),
-    on_attach = on_attach,
-    capabilities = capabilities,
-    cmd = { "julia",
-        "--startup-file=no",
-        "--history-file=no",
-        "-e",
-        'using LanguageServer\n' ..
-        'depot_path = joinpath(homedir(), ".julia")\n' ..
-        'project_path = pwd()\n' ..
-        '@info "Running language server" ' ..
-        '    VERSION pwd() project_path depot_path\n' ..
-        'server = LanguageServer.LanguageServerInstance(' ..
-        '    stdin, stdout, project_path, depot_path)\n' ..
-        'server.runlinter = true\n' ..
-        'run(server)\n',
-    },
-}
+-- lspconfig.julials.setup {
+--     root_dir = lspconfig.util.root_pattern("Project.toml"),
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     cmd = { "julia",
+--         "--startup-file=no",
+--         "--history-file=no",
+--         "-e",
+--         'using LanguageServer\n' ..
+--         'depot_path = joinpath(homedir(), ".julia")\n' ..
+--         'project_path = pwd()\n' ..
+--         '@info "Running language server" ' ..
+--         '    VERSION pwd() project_path depot_path\n' ..
+--         'server = LanguageServer.LanguageServerInstance(' ..
+--         '    stdin, stdout, project_path, depot_path)\n' ..
+--         'server.runlinter = true\n' ..
+--         'run(server)\n',
+--     },
+-- }
 
 lspconfig.ocamllsp.setup {
     -- root_dir = lspconfig.util.root_pattern("*.opam",
@@ -132,10 +138,10 @@ lspconfig.ocamllsp.setup {
     capabilities = capabilities,
 }
 
-lspconfig.csharp_ls.setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
+-- lspconfig.csharp_ls.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+-- }
 
 lspconfig.fsautocomplete.setup {
     root_dir = lspconfig.util.root_pattern("*.csproj"),
@@ -202,3 +208,11 @@ null_ls.setup({
         hover.dictionary,
     },
 })
+
+vim.cmd([[
+let g:copilot_filetypes = {
+    \ 'gitcommit': v:true,
+    \ 'markdown': v:true,
+    \ 'yaml': v:true
+    \ }
+]])
