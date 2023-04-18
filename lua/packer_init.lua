@@ -44,4 +44,7 @@ return require('packer').startup(function(use)
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", }
 
+    -- github copilot
+    use 'github/copilot.vim'
+
 end)
