@@ -36,15 +36,17 @@ return require('packer').startup(function(use)
 
     -- LSP
     use 'neovim/nvim-lspconfig'
-    use 'hrsh7th/nvim-cmp'  -- autocompletion plugin
-    use 'hrsh7th/cmp-nvim-lsp'  -- LSP source for nvim-cmp
+    use 'hrsh7th/nvim-cmp'     -- autocompletion plugin
+    use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
     use 'hrsh7th/vim-vsnip'
     use 'jose-elias-alvarez/null-ls.nvim'
+
+    -- debugging
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 
     -- syntax
     use { 'nvim-treesitter/nvim-treesitter', run = ":TSUpdate", }
 
     -- github copilot
     use 'github/copilot.vim'
-
 end)

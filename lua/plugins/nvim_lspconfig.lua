@@ -47,12 +47,14 @@ end
 
 local lspconfig = require('lspconfig')
 -- add additional capabilities supported by nvim-cmp
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+local cap = vim.lsp.protocol.make_client_capabilities()
+cap = require('cmp_nvim_lsp').default_capabilities(cap)
+cap.textDocument.semanticHighlighting = true
+cap.offsetEncoding = "utf-8"
 
 lspconfig.jedi_language_server.setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
     cmd = { "jedi-language-server" },
     init_options = {
         completion = {
@@ -83,12 +85,12 @@ lspconfig.jedi_language_server.setup {
 
 -- lspconfig.pyright.setup {
 --     on_attach = on_attach,
---     capabilities = capabilities,
+--     capabilities = cap,
 -- }
 
 -- lspconfig.dartls.setup {
 --     on_attach = on_attach,
---     capabilities = capabilities,
+--     capabilities = cap,
 --     cmd = { "dart", "language-server", "--protocol=lsp" },
 --     init_options = {
 --         onlyAnalyzeProjectsWithOpenFiles = "true",
@@ -101,19 +103,19 @@ lspconfig.jedi_language_server.setup {
 
 lspconfig.clangd.setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
     cmd = { "clangd" },
 }
 
 lspconfig.rust_analyzer.setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
 }
 
 -- lspconfig.julials.setup {
 --     root_dir = lspconfig.util.root_pattern("Project.toml"),
 --     on_attach = on_attach,
---     capabilities = capabilities,
+--     capabilities = cap,
 --     cmd = { "julia",
 --         "--startup-file=no",
 --         "--history-file=no",
@@ -135,18 +137,18 @@ lspconfig.ocamllsp.setup {
     --     "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
     root_dir = lspconfig.util.root_pattern(".ocamlformat"),
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
 }
 
 -- lspconfig.csharp_ls.setup {
 --     on_attach = on_attach,
---     capabilities = capabilities,
+--     capabilities = cap,
 -- }
 
 lspconfig.fsautocomplete.setup {
     root_dir = lspconfig.util.root_pattern("*.csproj"),
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
     cmd = { "fsautocomplete", "--background-service-enabled" },
 }
 
@@ -156,7 +158,7 @@ table.insert(runtime_path, "lua/?/init.lua")
 
 lspconfig.lua_ls.setup {
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
     settings = {
         Lua = {
             runtime = {
@@ -190,7 +192,7 @@ local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
     on_attach = on_attach,
-    capabilities = capabilities,
+    capabilities = cap,
     sources = {
         -- -- python
         diagnostics.ruff,
@@ -200,6 +202,9 @@ null_ls.setup({
         formatting.isort,
         -- -- shell
         diagnostics.shellcheck,
+        formatting.shfmt.with({
+            extra_args = { "-i", "4", "-ci" },
+        }),
         -- -- fish
         formatting.fish_indent,
         -- -- c/cpp
