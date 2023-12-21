@@ -112,6 +112,23 @@ lspconfig.rust_analyzer.setup {
     capabilities = cap,
 }
 
+lspconfig.tsserver.setup {
+    on_attach = on_attach,
+    capabilities = cap,
+}
+
+lspconfig.html.setup {
+    on_attach = on_attach,
+    capabilities = cap,
+    cmd = { "html-languageserver", "--stdio" },
+}
+
+lspconfig.cssls.setup {
+    on_attach = on_attach,
+    capabilities = cap,
+    cmd = { "css-languageserver", "--stdio" },
+}
+
 -- lspconfig.julials.setup {
 --     root_dir = lspconfig.util.root_pattern("Project.toml"),
 --     on_attach = on_attach,
@@ -209,6 +226,8 @@ null_ls.setup({
         formatting.fish_indent,
         -- -- c/cpp
         formatting.clang_format,
+        -- -- typescript
+        formatting.prettier,
         -- -- dictionary
         hover.dictionary,
     },

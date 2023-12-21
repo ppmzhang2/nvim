@@ -1,13 +1,22 @@
 require 'nvim-treesitter.configs'.setup {
     -- A list of parser names, or "all"
     ensure_installed = { "fish", "bash", "c", "cpp", "lua", "markdown", "python",
-        "rst", "rust", },
+        "rst", "rust", "javascript", "typescript", "html", "css", "json", },
 
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
+    -- Automatically install missing parsers when entering buffer
+    -- Recommendation: set to false if you don't have `tree-sitter` CLI
+    -- installed locally
+    auto_install = true,
+
     -- List of parsers to ignore installing (for "all")
     ignore_install = { "" },
+
+    modules = {
+        -- TODO: add more languages
+    },
 
     highlight = {
         -- `false` will disable the whole extension
