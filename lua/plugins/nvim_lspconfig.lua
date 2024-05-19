@@ -227,7 +227,18 @@ null_ls.setup({
         -- -- c/cpp
         formatting.clang_format,
         -- -- typescript
-        formatting.prettier,
+        formatting.prettier.with({
+            filetypes = { "typescript", "typescriptreact" },
+        }),
+        -- -- json (with 4 spaces)
+        formatting.prettier.with({
+            filetypes = { "json" },
+            extra_args = { "--tab-width", "4" },
+        }),
+        -- -- markdown
+        formatting.prettier.with({
+            filetypes = { "markdown" },
+        }),
         -- -- dictionary
         hover.dictionary,
     },
