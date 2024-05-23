@@ -157,10 +157,18 @@ lspconfig.ocamllsp.setup {
     capabilities = cap,
 }
 
--- lspconfig.csharp_ls.setup {
---     on_attach = on_attach,
---     capabilities = cap,
--- }
+lspconfig.csharp_ls.setup {
+    root_dir = lspconfig.util.root_pattern("*.csproj"),
+    on_attach = on_attach,
+    capabilities = cap,
+    -- cmd = { "csharp-ls" },
+    init_options = {
+        AutomaticWorkspaceInit = true,
+        displayLspServerName = true,
+        maxNumberOfProblems = 100,
+        showReferencesCodeLens = true,
+    },
+}
 
 lspconfig.fsautocomplete.setup {
     root_dir = lspconfig.util.root_pattern("*.csproj"),
