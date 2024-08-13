@@ -43,6 +43,7 @@ return require('packer').startup(function(use)
     use 'jose-elias-alvarez/null-ls.nvim'
     use 'norcalli/nvim-colorizer.lua'
     use { 'kaarmu/typst.vim', ft = { 'typst' } }
+    use 'mfussenegger/nvim-lint'
 
     -- debugging
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }

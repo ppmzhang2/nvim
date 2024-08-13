@@ -73,12 +73,29 @@ lspconfig.jedi_language_server.setup {
             extraPaths = {
                 "./__pypackages__/3.10/lib",
                 "./__pypackages__/3.11/lib",
+                "./__pypackages__/3.12/lib",
                 "./src",
             },
             symbols = {
                 ignoreFolders = { "__pypackages__", "__pycache__", "venv" },
                 maxSymbols = 20
             }
+        }
+    }
+}
+
+-- lspconfig.ruff.setup {
+lspconfig.ruff.setup {
+    on_attach = on_attach,
+    -- capabilities = cap, -- NO UTF-8
+    trace = "messages",
+    root_dir = lspconfig.util.root_pattern("ruff.toml"),
+
+    init_options = {
+        settings = {
+            configuration = "ruff.toml",
+            configurationPreference = "filesystemFirst",
+            logFile = "ruff.log",
         }
     }
 }
@@ -112,7 +129,7 @@ lspconfig.rust_analyzer.setup {
     capabilities = cap,
 }
 
-lspconfig.tsserver.setup {
+lspconfig.ts_ls.setup {
     on_attach = on_attach,
     capabilities = cap,
 }
@@ -220,11 +237,11 @@ null_ls.setup({
     capabilities = cap,
     sources = {
         -- -- python
-        diagnostics.ruff,
+        -- diagnostics.ruff,
         -- diagnostics.mypy,
         -- diagnostics.pylint,
         formatting.yapf,
-        formatting.isort,
+        -- formatting.isort,
         -- -- shell
         diagnostics.shellcheck,
         formatting.shfmt.with({

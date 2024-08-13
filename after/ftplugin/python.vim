@@ -14,3 +14,6 @@ call ConfigPath()
 
 " run
 noremap <buffer> <leader>r :Dispatch python %<cr>
+
+" fix with ruff
+noremap <buffer> <leader>f :!ruff check % --fix --silent<cr>
