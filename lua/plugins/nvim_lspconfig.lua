@@ -52,37 +52,37 @@ cap = require('cmp_nvim_lsp').default_capabilities(cap)
 cap.textDocument.semanticHighlighting = true
 cap.offsetEncoding = "utf-8"
 
-lspconfig.jedi_language_server.setup {
-    on_attach = on_attach,
-    capabilities = cap,
-    cmd = { "jedi-language-server" },
-    init_options = {
-        completion = {
-            enable = false,
-            disable = true,
-            -- disable_snippets = true,
-            resolve_eagerly = false,
-        },
-        diagnostics = {
-            enable = false,
-        },
-        hover = {
-            enable = true,
-        },
-        workspace = {
-            extraPaths = {
-                "./__pypackages__/3.10/lib",
-                "./__pypackages__/3.11/lib",
-                "./__pypackages__/3.12/lib",
-                "./src",
-            },
-            symbols = {
-                ignoreFolders = { "__pypackages__", "__pycache__", "venv" },
-                maxSymbols = 20
-            }
-        }
-    }
-}
+-- lspconfig.jedi_language_server.setup {
+--     on_attach = on_attach,
+--     capabilities = cap,
+--     cmd = { "jedi-language-server" },
+--     init_options = {
+--         completion = {
+--             enable = false,
+--             disable = true,
+--             -- disable_snippets = true,
+--             resolve_eagerly = false,
+--         },
+--         diagnostics = {
+--             enable = false,
+--         },
+--         hover = {
+--             enable = true,
+--         },
+--         workspace = {
+--             extraPaths = {
+--                 "./__pypackages__/3.10/lib",
+--                 "./__pypackages__/3.11/lib",
+--                 "./__pypackages__/3.12/lib",
+--                 "./src",
+--             },
+--             symbols = {
+--                 ignoreFolders = { "__pypackages__", "__pycache__", "venv" },
+--                 maxSymbols = 20
+--             }
+--         }
+--     }
+-- }
 
 -- lspconfig.ruff.setup {
 lspconfig.ruff.setup {
@@ -100,10 +100,10 @@ lspconfig.ruff.setup {
     }
 }
 
--- lspconfig.pyright.setup {
---     on_attach = on_attach,
---     capabilities = cap,
--- }
+lspconfig.pyright.setup {
+    on_attach = on_attach,
+    capabilities = cap,
+}
 
 -- lspconfig.dartls.setup {
 --     on_attach = on_attach,
