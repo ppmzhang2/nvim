@@ -14,13 +14,14 @@ vimrc](https://github.com/amix/vimrc).
   - `llvm`
   - `lua-language-server`
   - `rust-analyzer`
-  - `pyright`, `jedi-language-server`
+  - `pyright`
 - linting
   - `shellcheck`
-  - `pylint`
+  - `ruff`
 - formatter
   - `clang-format`
-  - `yapf`, `isort` 
+  - `yapf`
+  - `prettier`
 
 ## Installation
 
@@ -38,7 +39,7 @@ vimrc](https://github.com/amix/vimrc).
    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
    ```
 
-4. `PackerInstall` and `PackerCompile`
+3. `PackerInstall` and `PackerCompile`
 
 ## LSP Setup
 
