@@ -84,25 +84,33 @@ cap.offsetEncoding = "utf-8"
 --     }
 -- }
 
--- lspconfig.ruff.setup {
-lspconfig.ruff.setup {
-    on_attach = on_attach,
-    -- capabilities = cap, -- NO UTF-8
-    trace = "messages",
-    root_dir = lspconfig.util.root_pattern("ruff.toml"),
-
-    init_options = {
-        settings = {
-            configuration = "ruff.toml",
-            configurationPreference = "filesystemFirst",
-            logFile = "ruff.log",
-        }
-    }
-}
-
 lspconfig.pyright.setup {
     on_attach = on_attach,
     capabilities = cap,
+    -- disable linting
+    settings = {
+        python = {
+            analysis = {
+                diagnosticMode = "workspace",
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = false,
+                diagnosticSeverityOverrides = {
+                    reportUnusedImport = "none",
+                    reportUndefinedVariable = "none",
+                    reportUndefinedFunction = "none",
+                    reportUndefinedMethod = "none",
+                    reportUndefinedClass = "none",
+                    reportUndefinedModule = "none",
+                    reportUndefinedMember = "none",
+                    reportUndefinedParameter = "none",
+                    reportUndefinedType = "none",
+                    reportMissingModule = "none",
+                    reportMissingImports = "none",
+                    reportMissingTypeHint = "none",
+                },
+            },
+        },
+    },
 }
 
 -- lspconfig.dartls.setup {
@@ -226,48 +234,6 @@ lspconfig.lua_ls.setup {
         },
     },
 }
-
-local null_ls = require("null-ls")
-local formatting = null_ls.builtins.formatting
-local hover = null_ls.builtins.hover
-local diagnostics = null_ls.builtins.diagnostics
-
-null_ls.setup({
-    on_attach = on_attach,
-    capabilities = cap,
-    sources = {
-        -- -- python
-        -- diagnostics.ruff,
-        -- diagnostics.mypy,
-        -- diagnostics.pylint,
-        formatting.yapf,
-        -- formatting.isort,
-        -- -- shell
-        diagnostics.shellcheck,
-        formatting.shfmt.with({
-            extra_args = { "-i", "4", "-ci" },
-        }),
-        -- -- fish
-        formatting.fish_indent,
-        -- -- c/cpp
-        formatting.clang_format,
-        -- -- typescript
-        formatting.prettier.with({
-            filetypes = { "typescript", "typescriptreact" },
-        }),
-        -- -- json (with 4 spaces)
-        formatting.prettier.with({
-            filetypes = { "json" },
-            extra_args = { "--tab-width", "4" },
-        }),
-        -- -- markdown
-        formatting.prettier.with({
-            filetypes = { "markdown" },
-        }),
-        -- -- dictionary
-        hover.dictionary,
-    },
-})
 
 vim.cmd([[
 let g:copilot_filetypes = {

@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' } -- optional file icon
     }
-    use 'ervandew/supertab'
+    -- use 'ervandew/supertab'
     use 'preservim/tagbar'
 
     -- fuzzy finder
@@ -40,7 +40,7 @@ return require('packer').startup(function(use)
     use 'hrsh7th/nvim-cmp'     -- autocompletion plugin
     use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
     use 'hrsh7th/vim-vsnip'
-    use 'jose-elias-alvarez/null-ls.nvim'
+    -- use 'jose-elias-alvarez/null-ls.nvim'
     use 'norcalli/nvim-colorizer.lua'
     use { 'kaarmu/typst.vim', ft = { 'typst' } }
     use 'mfussenegger/nvim-lint'

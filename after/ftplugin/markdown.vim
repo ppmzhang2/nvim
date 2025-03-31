@@ -13,3 +13,6 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+
+" format with prettier
+nnoremap <buffer> <leader>f :silent %!prettier --parser markdown --tab-width 4 --write --stdin-filepath %<CR>
