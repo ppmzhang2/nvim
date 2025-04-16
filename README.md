@@ -5,7 +5,6 @@ vimrc](https://github.com/amix/vimrc).
 
 ## Prerequisites
 
-- `tree-sitter`
 - `telescope` fuzzy finder
   - `ripgrep`
 - `tagbar`

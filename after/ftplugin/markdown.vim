@@ -15,4 +15,4 @@ let g:tagbar_type_markdown = {
 \ }
 
 " format with prettier
-nnoremap <buffer> <leader>f :silent !prettier --parser markdown --tab-width 2 --write %<CR>
+nnoremap <buffer> <leader>f :silent !prettier --parser=markdown --tab-width=2 --write %<CR>
