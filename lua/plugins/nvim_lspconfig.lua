@@ -50,7 +50,7 @@ local lspconfig = require('lspconfig')
 local cap = vim.lsp.protocol.make_client_capabilities()
 cap = require('cmp_nvim_lsp').default_capabilities(cap)
 cap.textDocument.semanticHighlighting = true
-cap.offsetEncoding = "utf-8"
+cap.offsetEncoding = { "utf-16" }
 
 -- lspconfig.jedi_language_server.setup {
 --     on_attach = on_attach,
