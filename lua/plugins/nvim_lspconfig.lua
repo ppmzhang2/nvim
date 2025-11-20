@@ -45,46 +45,14 @@ local on_attach = function(_, bufnr)
     lsp_keymaps(bufnr)
 end
 
-local lspconfig = require('lspconfig')
 -- add additional capabilities supported by nvim-cmp
 local cap = vim.lsp.protocol.make_client_capabilities()
 cap = require('cmp_nvim_lsp').default_capabilities(cap)
 cap.textDocument.semanticHighlighting = true
 cap.offsetEncoding = { "utf-16" }
 
--- lspconfig.jedi_language_server.setup {
---     on_attach = on_attach,
---     capabilities = cap,
---     cmd = { "jedi-language-server" },
---     init_options = {
---         completion = {
---             enable = false,
---             disable = true,
---             -- disable_snippets = true,
---             resolve_eagerly = false,
---         },
---         diagnostics = {
---             enable = false,
---         },
---         hover = {
---             enable = true,
---         },
---         workspace = {
---             extraPaths = {
---                 "./__pypackages__/3.10/lib",
---                 "./__pypackages__/3.11/lib",
---                 "./__pypackages__/3.12/lib",
---                 "./src",
---             },
---             symbols = {
---                 ignoreFolders = { "__pypackages__", "__pycache__", "venv" },
---                 maxSymbols = 20
---             }
---         }
---     }
--- }
-
-lspconfig.pyright.setup {
+vim.lsp.config['pyright'] = {
+    filetypes = { "python" },
     on_attach = on_attach,
     capabilities = cap,
     -- disable linting
@@ -113,77 +81,50 @@ lspconfig.pyright.setup {
     },
 }
 
--- lspconfig.dartls.setup {
---     on_attach = on_attach,
---     capabilities = cap,
---     cmd = { "dart", "language-server", "--protocol=lsp" },
---     init_options = {
---         onlyAnalyzeProjectsWithOpenFiles = "true",
---         suggestFromUnimportedLibraries = "true",
---         closingLabels = "true",
---         outline = "true",
---         fluttreOutline = "true",
---     },
--- }
-
-lspconfig.clangd.setup {
+vim.lsp.config['clangd'] = {
+    filetypes = { "c", "cpp", "h", "hpp" },
     on_attach = on_attach,
     capabilities = cap,
     cmd = { "clangd" },
 }
 
-lspconfig.rust_analyzer.setup {
+vim.lsp.config['rust_analyzer'] = {
+    filetypes = { "rust" },
     on_attach = on_attach,
     capabilities = cap,
 }
 
-lspconfig.ts_ls.setup {
+vim.lsp.config['ts_ls'] = {
+    filetypes = { "ts", "tsx" },
     on_attach = on_attach,
     capabilities = cap,
 }
 
-lspconfig.html.setup {
+vim.lsp.config['html'] = {
+    filetypes = { "html" },
     on_attach = on_attach,
     capabilities = cap,
     cmd = { "html-languageserver", "--stdio" },
 }
 
-lspconfig.cssls.setup {
+vim.lsp.config['cssls'] = {
+    filetypes = { "css" },
     on_attach = on_attach,
     capabilities = cap,
     cmd = { "css-languageserver", "--stdio" },
 }
 
--- lspconfig.julials.setup {
---     root_dir = lspconfig.util.root_pattern("Project.toml"),
---     on_attach = on_attach,
---     capabilities = cap,
---     cmd = { "julia",
---         "--startup-file=no",
---         "--history-file=no",
---         "-e",
---         'using LanguageServer\n' ..
---         'depot_path = joinpath(homedir(), ".julia")\n' ..
---         'project_path = pwd()\n' ..
---         '@info "Running language server" ' ..
---         '    VERSION pwd() project_path depot_path\n' ..
---         'server = LanguageServer.LanguageServerInstance(' ..
---         '    stdin, stdout, project_path, depot_path)\n' ..
---         'server.runlinter = true\n' ..
---         'run(server)\n',
---     },
--- }
-
-lspconfig.ocamllsp.setup {
+vim.lsp.config['ocamllsp'] = {
+    filetypes = { "ocaml" },
     -- root_dir = lspconfig.util.root_pattern("*.opam",
     --     "esy.json", "package.json", ".git", "dune-project", "dune-workspace"),
-    root_dir = lspconfig.util.root_pattern(".ocamlformat"),
     on_attach = on_attach,
     capabilities = cap,
 }
 
-lspconfig.csharp_ls.setup {
-    root_dir = lspconfig.util.root_pattern("*.csproj"),
+vim.lsp.config['csharp_ls'] = {
+    -- root_dir = lspconfig.util.root_pattern("*.csproj"),
+    filetypes = { "csharp" },
     on_attach = on_attach,
     capabilities = cap,
     -- cmd = { "csharp-ls" },
@@ -195,8 +136,8 @@ lspconfig.csharp_ls.setup {
     },
 }
 
-lspconfig.fsautocomplete.setup {
-    root_dir = lspconfig.util.root_pattern("*.csproj"),
+vim.lsp.config['fsautocomplete'] = {
+    -- root_dir = lspconfig.util.root_pattern("*.csproj"),
     on_attach = on_attach,
     capabilities = cap,
     cmd = { "fsautocomplete", "--background-service-enabled" },
@@ -206,7 +147,8 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-lspconfig.lua_ls.setup {
+vim.lsp.config['lua_ls'] = {
+    filetypes = { 'lua' },
     on_attach = on_attach,
     capabilities = cap,
     settings = {
@@ -234,6 +176,22 @@ lspconfig.lua_ls.setup {
         },
     },
 }
+
+-- vim.lsp.config['codeagent'] = {
+--     filetypes = { "rust", "python" },
+--     on_attach = on_attach,
+--     capabilities = cap,
+--     cmd = { "codeagent" },
+-- }
+-- vim.lsp.enable('codeagent')
+
+-- vim.lsp.enable('pyright')
+vim.lsp.enable('clangd')
+vim.lsp.enable('rust_analyzer')
+-- vim.lsp.enable('ts_ls')
+-- vim.lsp.enable('html')
+-- vim.lsp.enable('cssls')
+vim.lsp.enable('lua_ls')
 
 vim.cmd([[
 let g:copilot_filetypes = {
