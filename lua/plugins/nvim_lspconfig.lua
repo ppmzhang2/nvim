@@ -4,6 +4,8 @@
 -- 2. https://github.com/hrsh7th/nvim-cmp
 -- ============================================================================
 
+vim.pack.add({ "https://github.com/neovim/nvim-lspconfig.git" })
+
 -- Mappings
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }

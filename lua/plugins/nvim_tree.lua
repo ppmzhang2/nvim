@@ -1,3 +1,4 @@
+vim.pack.add({ "https://github.com/nvim-tree/nvim-tree.lua" })
 -- setup with all defaults
 -- each of these are documented in `:help nvim-tree.OPTION_NAME`
 -- nested options are documented by accessing them with `.` (eg: `:help nvim-tree.view.mappings.list`).

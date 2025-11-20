@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/preservim/tagbar.git" })
+
 vim.cmd([[
 " - keep tags' order they have in the source file
 let g:tagbar_sort = 0

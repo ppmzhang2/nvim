@@ -1,0 +1,82 @@
+{
+  "plugins": {
+    "blamer.nvim": {
+      "rev": "e0d43c11697300eb68f00d69df8b87deb0bf52dc",
+      "src": "https://github.com/APZelos/blamer.nvim.git"
+    },
+    "cmp-nvim-lsp": {
+      "rev": "cbc7b02bb99fae35cb42f514762b89b5126651ef",
+      "src": "https://github.com/hrsh7th/cmp-nvim-lsp.git"
+    },
+    "gruvbox.nvim": {
+      "rev": "5e0a460d8e0f7f669c158dedd5f9ae2bcac31437",
+      "src": "https://github.com/ellisonleao/gruvbox.nvim.git"
+    },
+    "lualine.nvim": {
+      "rev": "3946f0122255bc377d14a59b27b609fb3ab25768",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
+    "mini.nvim": {
+      "rev": "b409fd1d8b9ea7ec7c0923eb2562b52ed5d1ab0a",
+      "src": "https://github.com/nvim-mini/mini.nvim"
+    },
+    "nvim-cmp": {
+      "rev": "d97d85e01339f01b842e6ec1502f639b080cb0fc",
+      "src": "https://github.com/hrsh7th/nvim-cmp.git"
+    },
+    "nvim-lint": {
+      "rev": "a0718addcf9b5ba4325eb45441020bb824af9503",
+      "src": "https://github.com/mfussenegger/nvim-lint.git"
+    },
+    "nvim-lspconfig": {
+      "rev": "b7c48a7111534b66bee077da8035ac7208a294ff",
+      "src": "https://github.com/neovim/nvim-lspconfig.git"
+    },
+    "nvim-tree.lua": {
+      "rev": "1eda2569394f866360e61f590f1796877388cb8a",
+      "src": "https://github.com/nvim-tree/nvim-tree.lua"
+    },
+    "nvim-treesitter": {
+      "rev": "42fc28ba918343ebfd5565147a42a26580579482",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter",
+      "version": "'main'"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311b0c92d460fac00eac706abd43d94d68af",
+      "src": "https://github.com/nvim-tree/nvim-web-devicons"
+    },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "tagbar": {
+      "rev": "7bfffca1f121afb7a9e38747500bf5270e006bb1",
+      "src": "https://github.com/preservim/tagbar.git"
+    },
+    "telescope-fzf-native.nvim": {
+      "rev": "6fea601bd2b694c6f2ae08a6c6fab14930c60e2c",
+      "src": "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
+      "version": "'main'"
+    },
+    "telescope.nvim": {
+      "rev": "83a3a713d6b2d2a408491a1b959e55a7fa8678e8",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "vim-dispatch": {
+      "rev": "a2ff28abdb2d89725192db5b8562977d392a4d3f",
+      "src": "https://github.com/tpope/vim-dispatch.git"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
+      "src": "https://github.com/tpope/vim-fugitive.git"
+    },
+    "vim-tabby": {
+      "rev": "6ee6dd5f06368e16fa358d8db62da1c29fc5671e",
+      "src": "https://github.com/ppmzhang2/vim-tabby"
+    },
+    "vim-vsnip": {
+      "rev": "9bcfabea653abdcdac584283b5097c3f8760abaa",
+      "src": "https://github.com/hrsh7th/vim-vsnip.git"
+    }
+  }
+}

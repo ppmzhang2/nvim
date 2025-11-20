@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/mfussenegger/nvim-lint.git" })
+
 -- unused configuration, use null-ls instead
 require('lint').linters_by_ft = {
     python = { 'ruff' },

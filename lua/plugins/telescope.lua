@@ -1,3 +1,47 @@
+-- Build telescope-fzf-native.nvim on install/update
+local function telescope_fzf_native_hooks(ev)
+    local name = ev.data.spec.name
+    local kind = ev.data.kind
+
+    if name == "telescope-fzf-native.nvim" and (kind == "install" or kind == "update") then
+        vim.notify("Building telescope-fzf-native.nvim (make)...", vim.log.levels.INFO)
+
+        vim.system({ "make" }, { cwd = ev.data.path }, function(obj)
+            -- vim.system callback is async: hop back to main loop for notifications
+            vim.schedule(function()
+                if obj.code == 0 then
+                    vim.notify("telescope-fzf-native.nvim built successfully", vim.log.levels.INFO)
+                else
+                    local err = (obj.stderr or "unknown error"):gsub("%s+$", "")
+                    vim.notify("telescope-fzf-native.nvim build failed: " .. err, vim.log.levels.ERROR)
+                end
+            end)
+        end)
+    end
+end
+
+vim.api.nvim_create_autocmd("PackChanged", {
+    desc = "Build telescope-fzf-native.nvim on install/update",
+    group = vim.api.nvim_create_augroup(
+        "telescope-fzf-native-pack-changed-build-handler",
+        { clear = true }
+    ),
+    callback = telescope_fzf_native_hooks,
+})
+
+-- Add packages
+vim.pack.add({
+    -- Telescope deps
+    "https://github.com/nvim-lua/plenary.nvim",
+    "https://github.com/nvim-telescope/telescope.nvim",
+
+    -- Native FZF sorter (needs `make`)
+    {
+        src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim",
+        version = "main",
+    },
+})
+
 -- borrowed from https://github.com/LunarVim/Neovim-from-scratch
 local status_ok, telescope = pcall(require, "telescope")
 if not status_ok then
@@ -37,10 +81,10 @@ telescope.setup {
     },
     extensions = {
         fzf = {
-            fuzzy = true, -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
         }
     }

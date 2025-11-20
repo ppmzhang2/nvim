@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/APZelos/blamer.nvim.git" })
+
 vim.cmd([[
 " - enable
 let g:blamer_enabled = 1

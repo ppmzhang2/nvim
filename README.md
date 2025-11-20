@@ -8,7 +8,7 @@ vimrc](https://github.com/amix/vimrc).
 - `telescope` fuzzy finder
   - `ripgrep`
 - `tagbar`
-  - `ctags`
+  - `universal-ctags`
 - LSP
   - `llvm`
   - `lua-language-server`
@@ -31,14 +31,7 @@ vimrc](https://github.com/amix/vimrc).
    git clone https://github.com/ppmzhang2/nvim.git ~/.config/nvim
    ```
 
-2. Set up `packer.vim`:
-
-   ```sh
-   git clone --depth 1 https://github.com/wbthomason/packer.nvim \
-   ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-   ```
-
-3. `PackerInstall` and `PackerCompile`
+2. `lua vim.pack.del({"telescope-fzf-native.nvim"})` then restart nvim
 
 ## LSP Setup
 

@@ -1,3 +1,5 @@
+vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+
 local minimap = require('mini.map')
 
 minimap.setup({
@@ -40,4 +42,4 @@ minimap.setup({
 
 })
 
-vim.keymap.set('n', '<Leader>mt', MiniMap.toggle)
+vim.keymap.set('n', '<Leader>mt', minimap.toggle)
