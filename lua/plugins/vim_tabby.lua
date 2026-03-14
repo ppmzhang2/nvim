@@ -1,1 +1,2 @@
-vim.pack.add({ "https://github.com/ppmzhang2/vim-tabby" })
+-- vim.pack.add({ "https://github.com/ppmzhang2/vim-tabby" })
+-- vim.pack.add({ "https://github.com/github/copilot.vim.git" })

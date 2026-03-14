@@ -187,7 +187,7 @@ vim.lsp.config['lua_ls'] = {
 -- }
 -- vim.lsp.enable('codeagent')
 
--- vim.lsp.enable('pyright')
+vim.lsp.enable('pyright')
 vim.lsp.enable('clangd')
 vim.lsp.enable('rust_analyzer')
 -- vim.lsp.enable('ts_ls')
